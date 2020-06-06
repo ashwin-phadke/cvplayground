@@ -1,5 +1,3 @@
-![Python application](https://github.com/ashwin-phadke/cvplayground/workflows/Python%20application/badge.svg?branch=master)
-
 # Computer Vision Playground
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
