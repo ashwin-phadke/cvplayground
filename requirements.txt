@@ -8,4 +8,5 @@ asposestorage==1.0.2
 Pillow==7.1.2
 Flask==1.1.2
 werkzeug==1.0.1
+pytest-custom-exit-code==0.3.0
 
