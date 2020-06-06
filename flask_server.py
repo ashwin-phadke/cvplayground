@@ -21,18 +21,39 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
+logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+
+app.secret_key = "secret key"
+
+model_dict = {
+	"ssdmv2i" : "ssd_mobilenet_v2_coco",
+	"ssdiv2"  : "ssd_inception_v2_coco_2017_11_17",
+	"frcnnv1" : "faster_rcnn_inception_v2_coco_2017_01_28",
+	"ssdmv2"  : "faster_rcnn_resnet50_coco"
+}
+
 
 def generate_uuid():
 	new_id = uuid.uuid4()
 	logging.info('UUID created')
 	return new_id
 
+def date_time():
+	time_string = time.strftime("%m/%d/%Y, %H:%M:%S",)
+	return time_string
 
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() 
 	
 @app.route('/')
 def upload_form():
 	return render_template('index.html')
 
+# @app.route('/index', methods=['GET', 'POST'])
+# def index():
+# 	if request.method == 'POST':
+# 		return url_for(upload_file)
 
 @app.route('/upload_page', methods=['GET','POST'])
 def show_form():
@@ -53,20 +74,22 @@ def upload_file():
 				return redirect(request.url)
 		file = request.files['file']
 		
-		#print(ip_address)
 		model = request.form['model']
 		model_name = model_dict[model]
-		#print(request.form.getlist('classselectcheckbox'))
-		# if isinstance(ret_val, str):
-		# 	print('success')
-		# print("dict val : ", ret_val)
-		# print(model)
 
 		if file.filename == '':
 			flash('No file selected for uploading')
 			logging.info("user %s did not select a file", ip_address)
 			return redirect(request.url)
-	
+		if file and allowed_file(file.filename):
+			filename = secure_filename(file.filename)
+			file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+			file.save(file_path)
+			logging.info('User %s successfully saved file', ip_address)
+			# print(file_path)
+			print("File saved successfully")
+			cur = conn.cursor()
+			new_uuid = str(generate_uuid())
 			
 			dtt = date_time()
 			#print(dtt)
