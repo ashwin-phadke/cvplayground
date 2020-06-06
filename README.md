@@ -6,12 +6,16 @@ App 1 :
 
 - Name : Process videos for object detection using Tensorflow
 
-- Models currently supported : 
-    Code             Model Name
-	"ssdmv2i" : "ssd_mobilenet_v2_coco",
-	"ssdiv2"  : "ssd_inception_v2_coco_2017_11_17",
-	"frcnnv1" : "faster_rcnn_inception_v2_coco_2017_01_28",
-	"ssdmv2"  : "faster_rcnn_resnet50_coco"
+- Models currently supported* : 
+
+|                |DB Code                          |Model                         |
+|----------------|-------------------------------|-----------------------------|
+|1|ssdmv2i            |ssd_mobilenet_v2_coco           |
+|2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17           |
+
+
+due to heroku space limitations.
+
 More model support coming soon.
 
 - Database : SQLite
