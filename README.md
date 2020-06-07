@@ -16,7 +16,7 @@ App 1 :
 
 due to heroku space limitations.
 
-More model support coming soon. Status passing, pytest with code 5
+More model support coming soon. Status passing, pytest with code 5. Import requires tensorflow model folder inside codes directory, however if it is available in your path then ou can directly link to it.
 
 - Database : SQLite
 
