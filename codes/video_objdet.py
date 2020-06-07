@@ -29,11 +29,10 @@ def objdetectionfunc(urlll, id, model_name):
 
     # What model to download.
     # Models can bee found here: https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
-    #MODEL_NAME = 'ssd_inception_v2_coco_2017_11_17'
+
     DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
     BASE_PATH = '/tensorflow'
     MODEL_NAME = model_name
-    # MODEL_FILE = MODEL_NAME + '.tar.gz'
 
     # #Download model only works if you have the full url with date and not just model name
     # if not model_name in BASE_PATH:
@@ -47,8 +46,7 @@ def objdetectionfunc(urlll, id, model_name):
     #             tar_file.extract(file, os.getcwd())
 
     INFERENCE = 'frozen_inference_graph.pb'
-    #
-    # 
+
     print(os.path.join(BASE_PATH, model_name, INFERENCE))
     # Path to frozen detection graph. This is the actual model that is used for the object detection.
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name, INFERENCE)
@@ -58,18 +56,6 @@ def objdetectionfunc(urlll, id, model_name):
 
     # Number of classes to detect
     NUM_CLASSES = 90
-
-    # Download Model
-    # if not os.path.exists(os.path.join(os.getcwd(), MODEL_FILE)):
-    #     print("Downloading model")
-    #     opener = urllib.request.URLopener()
-    #     opener.retrieve(DOWNLOAD_BASE + MODEL_FILE, MODEL_FILE)
-    #     tar_file = tarfile.open(MODEL_FILE)
-    #     for file in tar_file.getmembers():
-    #         file_name = os.path.basename(file.name)
-    #         if 'frozen_inference_graph.pb' in file_name:
-    #             tar_file.extract(file, os.getcwd())
-
 
     # Load a (frozen) Tensorflow model into memory.
     detection_graph = tf.Graph()
@@ -96,10 +82,7 @@ def objdetectionfunc(urlll, id, model_name):
     # Detection
     with detection_graph.as_default():
         with tf.compat.v1.Session(graph=detection_graph) as sess:
-                # tf.initialize_all_variables().run()
-                #tf.initialize_all_variables().run()
-            #while True:
-                # Read frame from camera
+          
                 while cap.isOpened():
                     ret, image_np = cap.read()
                     print(ret)
@@ -119,22 +102,22 @@ def objdetectionfunc(urlll, id, model_name):
                     # Extract number of detectionsd
                     num_detections = detection_graph.get_tensor_by_name(
                         'num_detections:0')
-                    # Actual detection.
-                    # (boxes, scores, classes, num_detections) = sess.run(
-                    #     [boxes, scores, classes, num_detections],
-                    #     feed_dict={image_tensor: image_np_expanded})
-                    # # Visualization of the results of a detection.
-                    # vis_util.visualize_boxes_and_labels_on_image_array(
-                    #     image_np,
-                    #     np.squeeze(boxes),
-                    #     np.squeeze(classes).astype(np.int32),
-                    #     np.squeeze(scores),
-                    #     category_index,
-                    #     use_normalized_coordinates=True,
-                    #     line_thickness=8)
-                    # print([category_index.get(i) for i in classes[0]])
-                    # print(scores)
-                    # Display output
+                    Actual detection.
+                    (boxes, scores, classes, num_detections) = sess.run(
+                        [boxes, scores, classes, num_detections],
+                        feed_dict={image_tensor: image_np_expanded})
+                    # Visualization of the results of a detection.
+                    vis_util.visualize_boxes_and_labels_on_image_array(
+                        image_np,
+                        np.squeeze(boxes),
+                        np.squeeze(classes).astype(np.int32),
+                        np.squeeze(scores),
+                        category_index,
+                        use_normalized_coordinates=True,
+                        line_thickness=8)
+                    print([category_index.get(i) for i in classes[0]])
+                    print(scores)
+                    Display output
                     out_img = cv2.resize(image_np, (640, 480))
                     out.write(out_img)
                     cv2.imshow('object detection', out_img)
@@ -148,7 +131,3 @@ def objdetectionfunc(urlll, id, model_name):
                 out.release()
                 cv2.destroyAllWindows()
         sess.close()
-    #    return True
-    # if __name__ == '__main__':
-    #     ObjDet(video_url=vurl)
-    #objdetectionfunc(urlll)
