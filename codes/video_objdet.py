@@ -32,7 +32,6 @@ def objdetectionfunc(urlll, id, model_name):
 
     DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
     BASE_PATH = '/tensorflow'
-    MODEL_NAME = model_name
 
     # #Download model only works if you have the full url with date and not just model name
     # if not model_name in BASE_PATH:
@@ -74,6 +73,8 @@ def objdetectionfunc(urlll, id, model_name):
         label_map, max_num_classes=NUM_CLASSES, use_display_name=True)
     category_index = label_map_util.create_category_index(categories)
 
+
+    # Helper function
     def load_image_into_numpy_array(image):
             (im_width, im_height) = image.size
             return np.array(image.getdata()).reshape(
@@ -102,7 +103,7 @@ def objdetectionfunc(urlll, id, model_name):
                     # Extract number of detectionsd
                     num_detections = detection_graph.get_tensor_by_name(
                         'num_detections:0')
-                    Actual detection.
+                    #Actual detection.
                     (boxes, scores, classes, num_detections) = sess.run(
                         [boxes, scores, classes, num_detections],
                         feed_dict={image_tensor: image_np_expanded})
@@ -117,7 +118,7 @@ def objdetectionfunc(urlll, id, model_name):
                         line_thickness=8)
                     print([category_index.get(i) for i in classes[0]])
                     print(scores)
-                    Display output
+                    #Display output
                     out_img = cv2.resize(image_np, (640, 480))
                     out.write(out_img)
                     cv2.imshow('object detection', out_img)
