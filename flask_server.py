@@ -3,7 +3,7 @@ from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 import os
 import urllib.request
-from subprocess import Popen
+import subprocess
 #from webapp import app
 from flask import Flask, flash, request, redirect, render_template
 from werkzeug.utils import secure_filename
@@ -13,8 +13,7 @@ import sqlite3
 import datetime
 import time
 import logging
-from flask_process import process_video
-
+from importlib import reload
 UPLOAD_FOLDER = 'uploads'
 
 app = Flask(__name__)
@@ -86,13 +85,11 @@ def upload_file():
 			file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 			file.save(file_path)
 			logging.info('User %s successfully saved file', ip_address)
-			# print(file_path)
 			print("File saved successfully")
 			cur = conn.cursor()
 			new_uuid = str(generate_uuid())
 			
 			dtt = date_time()
-			#print(dtt)
 			isUploaded = True
 			isProcessed = False
 			location = file_path
@@ -101,8 +98,8 @@ def upload_file():
 			conn.commit() 
 			conn.close()
 			logging.info('File saved successfully from %s user', ip_address)
-			process_video()
-			#objdetectionfunc(file_path)
+			id = subprocess.run(["python", "flask_process.py"], universal_newlines=True, stdout=subprocess.PIPE)
+			#process_video()
 			flash('File successfully uploaded')
 			return redirect('/')
 			
