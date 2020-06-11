@@ -8,6 +8,7 @@ import tarfile
 import tensorflow as tf
 import zipfile
 import cv2
+from importlib import reload
 
 from collections import defaultdict
 from io import StringIO
@@ -17,10 +18,12 @@ from PIL import Image
 from codes.models.research.object_detection.utils import visualization_utils as vis_util
 from codes.models.research.object_detection.utils import label_map_util
 
-
+#from skvideo.io import *
+#import skvideo.io
 def objdetectionfunc(urlll, id, model_name):
     
     VID_SAVE_PATH = '/tensorflow/downloads/'
+    #cap = skvideo.io.vreader(urlll)
     # Define the video stream
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
     fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
@@ -30,7 +33,7 @@ def objdetectionfunc(urlll, id, model_name):
     # What model to download.
     # Models can bee found here: https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
 
-    DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
+   #DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
     BASE_PATH = '/tensorflow'
 
     # #Download model only works if you have the full url with date and not just model name
@@ -46,7 +49,7 @@ def objdetectionfunc(urlll, id, model_name):
 
     INFERENCE = 'frozen_inference_graph.pb'
 
-    print(os.path.join(BASE_PATH, model_name, INFERENCE))
+    #print(os.path.join(BASE_PATH, model_name, INFERENCE))
     # Path to frozen detection graph. This is the actual model that is used for the object detection.
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name, INFERENCE)
 
@@ -86,8 +89,6 @@ def objdetectionfunc(urlll, id, model_name):
           
                 while cap.isOpened():
                     ret, image_np = cap.read()
-                    print(ret)
-
                     if not ret:
                         break
                     # Expand dimensions since the model expects images to have shape: [1, None, None, 3]
@@ -116,8 +117,6 @@ def objdetectionfunc(urlll, id, model_name):
                         category_index,
                         use_normalized_coordinates=True,
                         line_thickness=8)
-                    print([category_index.get(i) for i in classes[0]])
-                    print(scores)
                     #Display output
                     out_img = cv2.resize(image_np, (640, 480))
                     out.write(out_img)
@@ -132,3 +131,4 @@ def objdetectionfunc(urlll, id, model_name):
                 out.release()
                 cv2.destroyAllWindows()
         sess.close()
+        
