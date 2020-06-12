@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, request, redirect, url_for
+from flask import Flask, flash, request, redirect, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 import os
 import urllib.request
@@ -15,9 +15,11 @@ import time
 import logging
 from importlib import reload
 UPLOAD_FOLDER = 'uploads'
+DOWNLOAD_FOLDER = 'downloads'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 # app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -99,14 +101,24 @@ def upload_file():
 			conn.close()
 			logging.info('File saved successfully from %s user', ip_address)
 			id = subprocess.run(["python", "flask_process.py"], universal_newlines=True, stdout=subprocess.PIPE)
-			#process_video()
-			flash('File successfully uploaded')
-			return redirect('/')
+			filename = new_uuid + '.avi'
+			time.sleep(5)
+			return redirect('/downloadfile/'+ filename)
+
 			
 		else:
 			flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
 			logging.info('User %s did not save a video file', ip_address)
 			return redirect(request.url)
+
+@app.route("/downloadfile/<filename>", methods = ['GET'])
+def download_file(filename):
+    return render_template('download.html',value=filename)
+@app.route('/return-files/<filename>')
+def return_files_tut(filename):
+    file_path = DOWNLOAD_FOLDER +  filename
+    return send_file(file_path, as_attachment=True, attachment_filename='')
+
 
 if __name__ == "__main__":
     app.run(debug=True)
