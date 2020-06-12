@@ -22,7 +22,7 @@ from codes.models.research.object_detection.utils import label_map_util
 #import skvideo.io
 def objdetectionfunc(urlll, id, model_name):
     
-    VID_SAVE_PATH = '/tensorflow/downloads/'
+    VID_SAVE_PATH = '/downloads'
     #cap = skvideo.io.vreader(urlll)
     # Define the video stream
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
