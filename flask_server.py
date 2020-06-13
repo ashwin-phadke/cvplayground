@@ -15,7 +15,7 @@ import time
 import logging
 from importlib import reload
 UPLOAD_FOLDER = 'uploads'
-DOWNLOAD_FOLDER = 'downloads'
+DOWNLOAD_FOLDER = 'downloads/'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

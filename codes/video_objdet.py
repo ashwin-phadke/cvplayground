@@ -22,7 +22,7 @@ from codes.models.research.object_detection.utils import label_map_util
 #import skvideo.io
 def objdetectionfunc(urlll, id, model_name):
     
-    VID_SAVE_PATH = '/downloads'
+    VID_SAVE_PATH = 'downloads/'
     #cap = skvideo.io.vreader(urlll)
     # Define the video stream
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
@@ -34,7 +34,7 @@ def objdetectionfunc(urlll, id, model_name):
     # Models can bee found here: https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md
 
    #DOWNLOAD_BASE = 'http://download.tensorflow.org/models/object_detection/'
-    BASE_PATH = '/tensorflow'
+    BASE_PATH = 'detect_models/'
 
     # #Download model only works if you have the full url with date and not just model name
     # if not model_name in BASE_PATH:
@@ -54,7 +54,7 @@ def objdetectionfunc(urlll, id, model_name):
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name, INFERENCE)
 
     # List of the strings that is used to add correct label for each box.
-    PATH_TO_LABELS = os.path.join('/tensorflow/models/research/object_detection/data', 'mscoco_label_map.pbtxt')
+    PATH_TO_LABELS = os.path.join('codes/models/research/object_detection/data', 'mscoco_label_map.pbtxt')
 
     # Number of classes to detect
     NUM_CLASSES = 90
