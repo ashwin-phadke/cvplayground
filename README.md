@@ -1,4 +1,5 @@
 # Computer Vision Playground
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
 
