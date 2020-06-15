@@ -1,5 +1,6 @@
 # Computer Vision Playground
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
 
@@ -12,12 +13,13 @@ App 1 :
 |                |DB Code                          |Model                         |
 |----------------|-------------------------------|-----------------------------|
 |1|ssdmv2i            |ssd_mobilenet_v2_coco           |
-|2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17           |
+|2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17    (Currently active)       |
 
 
 due to heroku space limitations.
 
 More model support coming soon. Status passing, pytest with code 5. Import requires tensorflow model folder inside codes directory, however if it is available in your path then ou can directly link to it. 
+More models can be downloaded and saved in detect_models, the model name needs to be added in the dictionary and saved accordingly in the database to take effect.
 Heroku slug size exceeding due to packages and the model.
 
 - Database : SQLite
