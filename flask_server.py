@@ -101,7 +101,7 @@ def upload_file():
 			conn.close()
 			logging.info('File saved successfully from %s user', ip_address)
 			id = subprocess.run(["python", "flask_process.py"], universal_newlines=True, stdout=subprocess.PIPE)
-			filename = new_uuid + '.avi'
+			filename = new_uuid + '.mp4'
 			time.sleep(5)
 			return redirect('/downloadfile/'+ filename)
 
@@ -114,6 +114,7 @@ def upload_file():
 @app.route("/downloadfile/<filename>", methods = ['GET'])
 def download_file(filename):
     return render_template('download.html',value=filename)
+	
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER +  filename
