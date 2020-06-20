@@ -26,8 +26,9 @@ def objdetectionfunc(urlll, id, model_name):
     #cap = skvideo.io.vreader(urlll)
     # Define the video stream
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
-    fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
-    out = cv2.VideoWriter(VID_SAVE_PATH + id + '.avi',fourcc, 20.0, (640,480))
+    #fourcc = cv2.VideoWriter_fourcc('M','J','P','G')
+    fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+    out = cv2.VideoWriter(VID_SAVE_PATH + id + '.mp4',fourcc, 20.0, (640,480))
 
 
     # What model to download.
