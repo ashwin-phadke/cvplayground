@@ -25,13 +25,13 @@ def process_video():
     #print(id, location, model_name)
     if not (id, location):
         cur.execute(
-        "SELECT id, location FROM uploads WHERE isProcessed=0 order by datetime DESC")
+            "SELECT id, location FROM uploads WHERE isProcessed=0 order by datetime DESC")
     objdetectionfunc(location, id, model_name)
     cur.execute("UPDATE uploads SET isProcessed=1  WHERE id='"+id+"'")
     conn.commit()
     conn.close()
     return id
-    #reload(video_objdet)
+    # reload(video_objdet)
 
 
 if __name__ == "__main__":
