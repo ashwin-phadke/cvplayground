@@ -17,21 +17,16 @@ App 1 :
 |2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17    (Currently active)       |
 
 
-due to heroku space limitations.
-
-More model support coming soon. Status passing, pytest with code 5. Import requires tensorflow model folder inside codes directory, however if it is available in your path then ou can directly link to it. 
-More models can be downloaded and saved in detect_models, the model name needs to be added in the dictionary and saved accordingly in the database to take effect.
-Heroku slug size exceeding due to packages and the model.
 
 - Database : SQLite
 
-- Current app version : https://cvplayground.herokuapp.com/
+- UI based app version : https://cvplayground.herokuapp.com/
 
 - Deployment ProcFile : added
 
 - Languages, Tools, Frameworks : TensorFlow, Python, Flask, HTML+CSS+JS, SQLite database.
 
-    ### Getting Started
+    ### Getting Started :
 
     - Check to see if the following structure exists else create the following directory structure : 
     ![Directory Structure](dir_struct.jpg?raw=true "Title")
@@ -41,7 +36,7 @@ Heroku slug size exceeding due to packages and the model.
     - db has the database sqlite file.
     - templates has the web HTML templates for user interaction.
 
-    ### Installation 
+    ### Installation :
 
     - Go inside the main project directory and execute  
 
@@ -72,4 +67,10 @@ Heroku slug size exceeding due to packages and the model.
       which will start the default flask_server at `localhost:5000` or whatever port you designate in the `flask_server.py` file.
 
     - You are now ready.
+
+    ### Notes : 
+    >More model support coming soon. Status passing, pytest with code 5. Import requires >tensorflow model folder inside codes directory, however if it is available in your path >then ou can directly link to it. 
+    >More models can be downloaded and saved in detect_models, the model name needs to be >added in the dictionary and saved accordingly in the database to take effect.
+    >Heroku slug size exceeding due to packages and the model.
+    >The slug size limits deploying this on Heroku , hence deploying to follow on services >like AWS Beanstalk or Google app engine.
 
