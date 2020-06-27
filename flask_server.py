@@ -125,7 +125,8 @@ def download_file(filename):
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
-    return send_file(file_path)
+    return send_file(file_path,  as_attachment=True)
+    #return send_from_directory(directory=DOWNLOAD_FOLDER, filename=filename)
 
 
 if __name__ == "__main__":
