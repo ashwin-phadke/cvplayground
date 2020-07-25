@@ -1,6 +1,7 @@
 Contributions are welcome for :
 
 App 1 
+- Improving web UI.
 - Adding support for more models based on TensorFlow.
 - Extending the application.
 - Use TensorFlow sessions in a better way rather than subprocess.
@@ -9,7 +10,7 @@ App 1
 
 General Contributions include :
 
-- Findingissues related to flow and security.
+- Finding issues related to flow and security.
 - Code cleanup.
 - Better modularization support.
 
