@@ -29,12 +29,10 @@
   .rightpane {
     width: 50%;
     height: 100%;
-    position: relative;
     float: right;
-    background-image: url('/home/aphadke/Downloads/b13054f28ec6985650049c437cf62da03ff60ad5.webp');
+    background-image: url('/home/aphadke/Github/cvplayground/templates/image.png');
     background-repeat: no-repeat;
-    background-position: right;
-    background-color: black;
+    background-position: center;
     border-collapse: collapse;
   }
   
@@ -42,29 +40,33 @@
     width: 100%;
     height: 50;
     border-collapse: collapse;
-    background-color: #4da6ff;
+    background-color: black;
   }</style>
 
 <div class="container">
     <div class="toppane"></div>
-    <h1>Welcome To Computer Vision Playground</h1>
+    <p style="background-color:black;color:white; font-size: x-large;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Welcome to Computer Vision Playground</p>
     <style>
         body{
-            background-color: rgb(9, 184, 184);
+            background-color: black;
             text-align:center;
             box-sizing:border-box;
             font-family:"Lato",Sans-serif;
+            font-size: larger;
        
           }
     </style>
     <div class="leftpane">
-      <h1>Tensorflow Object Detection API, model zoo and Flask</h1></div>
+      <p style="background-color:black;color:white;font-size: large;">Tensorflow Object Detection API, model zoo and Flask</p>
+
+      </div>
       <style>
         body{
             background-color: black;
             text-align:center;
             box-sizing:border-box;
             font-family:"Lato",Sans-serif;
+            font-style: initial;
             font-size: small;
           /*   position:relative; */
           }
@@ -72,12 +74,12 @@
      
 
     <div class="rightpane">
-      <h1>Demo</h1></div>
+      <!-- <h1>Demo</h1></div> -->
       <div class="box">
-        <a href="{{ url_for('show_form') }}" class="btn btn-white btn-animation-1">TensorFlow</a> 
+        <a href="{{ url_for('show_form') }}" class="btn btn-white btn-animation-1">TRY NOW</a> 
         <style>
         body{
-            background-color: rgb(9, 184, 184);
+            background-color: black;
             text-align:center;
             box-sizing:border-box;
             font-family:"Lato",Sans-serif;
@@ -105,13 +107,13 @@
           }
           
           .btn-white{
-            background:#fff;
-            color:#000;
+            background:black;
+            color:#fff;
           }
           
           .btn:hover{
-             box-shadow:0px 10px 10px rgba(0,0,0,0.2);
-             transform : translateY(-3px);
+              box-shadow:0px 10px 10px rgba(0,0,0,0.2);
+              transform : translateY(-3px);
           }
           
           .btn:active{
@@ -139,7 +141,7 @@
           }
           
           .btn-white::after {
-              background: #fff;
+              background: brown;
           }
           
           .btn-animation-1:hover::after {
