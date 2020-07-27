@@ -7,6 +7,7 @@ A computer vision playground to try and test end to end(test to deploy) computer
 
 App 1 : 
 
+This app facilitates the user to just upload any desired video and check the detection accuracy based on the user selected Tensorflow model from model zoo without having to go through writing code for such commom task and can then make appropriate decision in the choice of the right model hence saving important development time.
 - Screenshots :
 
 ![Landing Page of the app](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/landing_page.png)
@@ -20,7 +21,18 @@ ________________________________________________________________________________
 
 ![List of models](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/final_model_select.png)
 *You can see what models are currently supported or available using the model select dropdown as shown*
+_________________________________________________________________________________________
 
+![Show user prompt](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/model.png)
+*Check to see whether you have selected a model and uploaded the file correctly before submitting the form to process your video.*
+_________________________________________________________________________________________
+
+![Processed Video page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/processed_download_page.png)
+*You can now finally download the video processed with the Tensorflow model you seected earlier and see the results for yourself*
+
+_________________________________________________________________________________________
+
+  
 - Name : Process videos for object detection using Tensorflow
 
 - Models currently supported* : 
