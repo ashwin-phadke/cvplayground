@@ -11,6 +11,15 @@ App 1 :
 
 ![Landing Page of the app](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/landing_page.png)
 *This is the landing page when you start your Flask server. Image credits left- Tensorflow , right -Youtube,*
+______________________________________________________________________________________
+
+![Model Select Page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/model_select_page.png)
+*Here you can choose a model to perform object detection on your desired video. All the models are from the Tensorflow model zoo and you can also add or remove models from this section to better suit your own deployed app. After selecting your model you then upload the video you would like to process using the select a file to upload option and click submit.*
+
+_________________________________________________________________________________________
+
+![List of models](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/final_model_select.png)
+*You can see what models are currently supported or available using the model select dropdown as shown*
 
 - Name : Process videos for object detection using Tensorflow
 
