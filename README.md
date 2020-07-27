@@ -7,6 +7,11 @@ A computer vision playground to try and test end to end(test to deploy) computer
 
 App 1 : 
 
+- Screenshots :
+
+![Landing Page of the app](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/landing_page.png)
+*This is the landing page when you start your Flask server. Image credits left- Tensorflow , right -Youtube,*
+
 - Name : Process videos for object detection using Tensorflow
 
 - Models currently supported* : 
