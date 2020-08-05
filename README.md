@@ -3,7 +3,7 @@
 
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
- **To contribute create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
+ **To contribute, create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
 
 App 1 : 
 
