@@ -1,6 +1,7 @@
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/slide-1997831_1280.png" height="30" width="30" title="hover text">
- </p># Computer Vision Playground
+# Computer Vision Playground
+
+![Landing Page of the app](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/logo.png)
+
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
