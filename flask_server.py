@@ -5,7 +5,7 @@ import os
 import urllib.request
 import subprocess
 #from webapp import app
-from flask import Flask, flash, request, redirect, render_template
+from flask import Flask, flash, request, redirect, render_template, make_response
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import uuid
@@ -126,8 +126,6 @@ def download_file(filename):
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
-    #return send_from_directory(directory=DOWNLOAD_FOLDER, filename=filename)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
