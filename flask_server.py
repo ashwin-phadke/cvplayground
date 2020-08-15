@@ -14,6 +14,7 @@ import datetime
 import time
 import logging
 from importlib import reload
+import flask_process
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
 
@@ -105,8 +106,9 @@ def upload_file():
             conn.commit()
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
-            id = subprocess.run(["python", "flask_process.py"],
-                                universal_newlines=True, stdout=subprocess.PIPE)
+            flask_process.process_video()
+            # id = subprocess.run(["python", "flask_process.py"],
+            #                     universal_newlines=True, stdout=subprocess.PIPE)
             filename = new_uuid + '.mp4'
             time.sleep(5)
             return redirect('/downloadfile/' + filename)
