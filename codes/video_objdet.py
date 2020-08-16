@@ -45,9 +45,10 @@ def objdetectionfunc(urlll, id, model_name):
     VID_SAVE_PATH = 'static/'
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
-    #PATH_TO_CKPT = os.path.join(BASE_PATH, model_name, INFERENCE)
-    PATH_TO_CKPT = '/cvplayground/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb'
-    PATH_TO_PBTXT = '/cvplayground/faster_rcnn_inception_v2_coco_2018_01_28/resnet.pbtxt'
+    PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
+    PATH_TP_PBTXT = os.path.join(BASE_PATH, model_name + '/', 'resnet.pbtxt')
+    #PATH_TO_CKPT = '/cvplayground/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb'
+    PATH_TO_PBTXT = '/home/aphadke/Github/cvplayground/detect_models/faster_rcnn_inception_v2_coco_2018_01_28/resnet.pbtxt'
     classes_90 = [ "person", "bicycle", "car", "motorcycle",
                 "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                 "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
