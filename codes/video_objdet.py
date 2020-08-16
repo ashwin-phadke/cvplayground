@@ -60,17 +60,17 @@ def objdetectionfunc(urlll, id, model_name):
                 "unknown", "unknown", "toilet", "unknown", "tv", "laptop", "mouse", "remote", "keyboard",
                 "cell phone", "microwave", "oven", "toaster", "sink", "refrigerator", "unknown",
                 "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush" ] 
-    # Leemos las clases disponibles en openImages
+
     CLASSES = classes_90  #New list of classess with 90 classess.
     print(CLASSES)
 
-    # Le damos colores a las cajas para cada clase
+
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3)) 
 
-    # Importamos el modelo de red
+
     cvNet = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT )
 
-    # Leemos una imagen
+    
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
     fourcc = cv2.VideoWriter_fourcc(*'MP4V')
     out = cv2.VideoWriter(VID_SAVE_PATH + id + '.mp4',fourcc, 20.0, (640,480))
@@ -85,11 +85,8 @@ def objdetectionfunc(urlll, id, model_name):
             break
 
 
-        #img = cv2.imread(args["image"])
-
-        # Obtenemos las dimensiones de la imagen
-        h = frame.shape[0] # Alto
-        w = frame.shape[1] # Ancho
+        h = frame.shape[0] 
+        w = frame.shape[1] 
         img = np.array(frame)
         cvNet.setInput(cv2.dnn.blobFromImage(img, size=(300, 300), swapRB=True, crop=False))
         detections = cvNet.forward()
