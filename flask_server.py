@@ -32,10 +32,13 @@ app.secret_key = "secret key"
 model_dict = {
     "ssdmv2i": "ssd_mobilenet_v2_coco",
     "ssdiv2": "ssd_inception_v2_coco_2017_11_17",
-    "frcnnv1": "faster_rcnn_inception_v2_coco_2017_01_28",
+    "frcnnv2": "faster_rcnn_inception_v2_coco_2018_01_28",
     "ssdmv2": "faster_rcnn_resnet50_coco"
 }
 
+#pbtxt_dict = {
+# 
+#}
 
 def generate_uuid():
     new_id = uuid.uuid4()
@@ -107,8 +110,6 @@ def upload_file():
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
             flask_process.process_video()
-            # id = subprocess.run(["python", "flask_process.py"],
-            #                     universal_newlines=True, stdout=subprocess.PIPE)
             filename = new_uuid + '.mp4'
             time.sleep(5)
             return redirect('/downloadfile/' + filename)
