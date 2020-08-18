@@ -26,15 +26,6 @@ import imutils
 import time
 
 def objdetectionfunc(urlll, id, model_name, pbtxt_name):
-  
-
-    """
-    NEW METHOD TO BE MERGED WITH THE FLOW SOON IN THE UPCOMING RELEASE
-    SOLVES A POINT FROM CONTRIBUTING FILE.
-
-    METHOD MERGED
-    """
-
 
     # construct the argument parse and parse the arguments
     ap = argparse.ArgumentParser()
@@ -47,7 +38,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     INFERENCE = 'frozen_inference_graph.pb'
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
     PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name, pbtxt_name)
-    classes_90 = [ "person", "bicycle", "car", "motorcycle",
+    classes_90 = ["person", "bicycle", "car", "motorcycle",
                 "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                 "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
                 "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "unknown", "backpack",
@@ -74,12 +65,9 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     fourcc = cv2.VideoWriter_fourcc(*'MP4V')
     out = cv2.VideoWriter(VID_SAVE_PATH + id + '.mp4',fourcc, 20.0, (640,480))
 
-    print('nothere')
     while cap.isOpened():
         ret, frame = cap.read()
-        print('here')
         if not ret:
-            print('this is why')
             break
 
         h = frame.shape[0] 
@@ -120,7 +108,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
 
         out_img = cv2.resize(img, (640, 480))
         out.write(out_img)
-        cv2.imshow('img', img)
+        cv2.imshow('img', out_img)
     
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cap.release()
