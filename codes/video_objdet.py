@@ -85,7 +85,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
         h = frame.shape[0] 
         w = frame.shape[1] 
         img = np.array(frame)
-        cvNet.setInput(cv2.dnn.blobFromImage(img, size=(h, w), swapRB=True, crop=False))
+        cvNet.setInput(cv2.dnn.blobFromImage(img, size=(300, 300), swapRB=True, crop=False))
         detections = cvNet.forward()
 
 
@@ -118,7 +118,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                 print(label)
 
 
-        out_img = cv2.resize(img, (h, w))
+        out_img = cv2.resize(img, (640, 480))
         out.write(out_img)
         cv2.imshow('img', img)
     
