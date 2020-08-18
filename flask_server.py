@@ -30,20 +30,11 @@ logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
 app.secret_key = "secret key"
 
 model_dict = {
-    "ssdmv2i": "ssd_mobilenet_v2_coco",
-    "ssdiv2": "ssd_inception_v2_coco_2017_11_17",
-    "frcnnv2": "faster_rcnn_inception_v2_coco_2018_01_28",
-    "ssdmv2": "faster_rcnn_resnet50_coco"
+    "ssdmv2i": ("ssd_mobilenet_v2_coco","mobilenet.pbtxt"),
+    "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssdinceptionv2.pbtxt"),
+    "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28","frcnninceptionv2.pbtxt"),
+    "ssdmv2": ("faster_rcnn_resnet50_coco", "frcnnresnet50.pbtxt")
 }
-
-pbtxt_dict = {
-    "ssdmv2i": "mobilenet.pbtxt",
-    "ssdiv2": "ssdinceptionv2.pbtxt",
-    "frcnnv2": "frcnninceptionv2.pbtxt",
-    "ssdmv2": "frcnnresnet50.pbtxt"
- 
-}
-
 
 def generate_uuid():
     new_id = uuid.uuid4()
@@ -89,8 +80,7 @@ def upload_file():
         file = request.files['file']
 
         model = request.form['model']
-        model_name = model_dict[model]
-        pbtxt_name = pbtxt_dict[model]
+        model_name, pbtxt_name = model_dict[model]
 
         if file.filename == '':
             flash('No file selected for uploading')
