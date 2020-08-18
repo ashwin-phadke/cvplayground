@@ -25,7 +25,7 @@ import argparse
 import imutils
 import time
 
-def objdetectionfunc(urlll, id, model_name):
+def objdetectionfunc(urlll, id, model_name, pbtxt_name):
   
 
     """
@@ -46,9 +46,7 @@ def objdetectionfunc(urlll, id, model_name):
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
-    PATH_TP_PBTXT = os.path.join(BASE_PATH, model_name + '/', 'resnet.pbtxt')
-    #PATH_TO_CKPT = '/cvplayground/faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb'
-    PATH_TO_PBTXT = '/home/aphadke/Github/cvplayground/detect_models/faster_rcnn_inception_v2_coco_2018_01_28/resnet.pbtxt'
+    PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name, pbtxt_name)
     classes_90 = [ "person", "bicycle", "car", "motorcycle",
                 "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                 "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
@@ -69,13 +67,12 @@ def objdetectionfunc(urlll, id, model_name):
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3)) 
 
 
-    cvNet = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT )
+    cvNet = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT)
 
     
     cap = cv2.VideoCapture(urlll)  # Change only if you have more than one webcams
     fourcc = cv2.VideoWriter_fourcc(*'MP4V')
     out = cv2.VideoWriter(VID_SAVE_PATH + id + '.mp4',fourcc, 20.0, (640,480))
-
 
     print('nothere')
     while cap.isOpened():
@@ -85,11 +82,10 @@ def objdetectionfunc(urlll, id, model_name):
             print('this is why')
             break
 
-
         h = frame.shape[0] 
         w = frame.shape[1] 
         img = np.array(frame)
-        cvNet.setInput(cv2.dnn.blobFromImage(img, size=(300, 300), swapRB=True, crop=False))
+        cvNet.setInput(cv2.dnn.blobFromImage(img, size=(h, w), swapRB=True, crop=False))
         detections = cvNet.forward()
 
 

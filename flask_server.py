@@ -36,9 +36,14 @@ model_dict = {
     "ssdmv2": "faster_rcnn_resnet50_coco"
 }
 
-#pbtxt_dict = {
-# 
-#}
+pbtxt_dict = {
+    "ssdmv2i": "mobilenet.pbtxt",
+    "ssdiv2": "ssdinceptionv2.pbtxt",
+    "frcnnv2": "frcnninceptionv2.pbtxt",
+    "ssdmv2": "frcnnresnet50.pbtxt"
+ 
+}
+
 
 def generate_uuid():
     new_id = uuid.uuid4()
@@ -85,6 +90,7 @@ def upload_file():
 
         model = request.form['model']
         model_name = model_dict[model]
+        pbtxt_name = pbtxt_dict[model]
 
         if file.filename == '':
             flash('No file selected for uploading')
@@ -104,8 +110,8 @@ def upload_file():
             isProcessed = False
             location = file_path
             status = 1
-            cur.execute("INSERT INTO uploads (id, status, isUploaded, isProcessed, location, datetime, model_name) values(?, ?, ?, ?, ?, ?, ?)",
-                        (new_uuid, status, isUploaded, isProcessed, location, dtt, model_name))
+            cur.execute("INSERT INTO uploads (id, status, isUploaded, isProcessed, location, datetime, model_name, pbtxt_name) values(?, ?, ?, ?, ?, ?, ?, ?)",
+                        (new_uuid, status, isUploaded, isProcessed, location, dtt, model_name, pbtxt_name))
             conn.commit()
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
