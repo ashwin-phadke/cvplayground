@@ -5,7 +5,7 @@ import os
 import urllib.request
 import subprocess
 #from webapp import app
-from flask import Flask, flash, request, redirect, render_template, make_response
+from flask import render_template, make_response
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import uuid
@@ -13,8 +13,8 @@ import sqlite3
 import datetime
 import time
 import logging
-from importlib import reload
 import flask_process
+
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
 
@@ -41,15 +41,12 @@ def generate_uuid():
     logging.info('UUID created')
     return new_id
 
-
 def date_time():
     time_string = time.strftime("%m/%d/%Y, %H:%M:%S",)
     return time_string
 
-
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower()
-
 
 @app.route('/')
 def upload_form():
@@ -60,11 +57,9 @@ def upload_form():
 # 	if request.method == 'POST':
 # 		return url_for(upload_file)
 
-
 @app.route('/upload_page', methods=['GET', 'POST'])
 def show_form():
     return render_template('upload.html')
-
 
 @app.route('/uploads', methods=['POST'])
 def upload_file():

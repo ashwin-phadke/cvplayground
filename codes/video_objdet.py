@@ -9,7 +9,6 @@ import tarfile
 import tensorflow as tf
 import zipfile
 import cv2
-from importlib import reload
 
 from collections import defaultdict
 from io import StringIO
