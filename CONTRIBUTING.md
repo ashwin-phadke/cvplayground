@@ -1,6 +1,7 @@
 Contributions are welcome for :
 
 - Package to publish on [PyPi](pypi.org)
+
 App 1 
 - Improving web UI.
 - Adding support for more models based on TensorFlow.
