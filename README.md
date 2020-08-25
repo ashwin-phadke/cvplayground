@@ -105,6 +105,9 @@ ________________________________________________________________________________
     - You are now ready.
 
     ### Notes : 
+    [UPDATE] :  With the change in how models are loaded you can now simply create a folder named as your model name with the model's `.pb` and `.pbtxt` and add it to the dictionary to make it work with your own model easily.
+
+    
     More model support coming soon. Status passing, pytest with code 5. Import requires tensorflow model folder inside codes directory, however if it is available in your path then ou can directly link to it. 
     More models can be downloaded and saved in detect_models, the model name needs to be added in the dictionary and saved accordingly in the database to take effect.
     Heroku slug size exceeding due to packages and the model.
