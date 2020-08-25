@@ -42,11 +42,10 @@ ________________________________________________________________________________
 
 - Models currently supported* : 
 
-|                |DB Code                          |Model                         |
-|----------------|-------------------------------|-----------------------------|
-|1|ssdmv2i            |ssd_mobilenet_v2_coco           |
-|2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17    (Currently active)       |
-
+|                |DB Code                          |Frozen graph name                         |Pbtxt file
+|----------------|-------------------------------|-----------------------------|-----------------------------|
+|1|ssdmv2i            |frozen_inference_graph.pb          |
+|2          |ssdiv2            |ssd_inception_v2_coco_2017_11_17    (Currently active)       | ssdinceptionv2.pbtxt|
 
 
 - Database : SQLite
