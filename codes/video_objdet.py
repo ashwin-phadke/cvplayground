@@ -1,28 +1,30 @@
 # import the necessary packages
-import numpy as np
+import argparse
 import os
-
-import six.moves.urllib as urllib
 import sys
-sys.path.append("..")
 import tarfile
-import tensorflow as tf
+import time
 import zipfile
-import cv2
-
 from collections import defaultdict
 from io import StringIO
+
+import cv2
+import imutils
+import numpy as np
+import six.moves.urllib as urllib
+import tensorflow as tf
+from imutils.video import FPS, VideoStream
 from matplotlib import pyplot as plt
 from PIL import Image
 
-from codes.models.research.object_detection.utils import visualization_utils as vis_util
 from codes.models.research.object_detection.utils import label_map_util
+from codes.models.research.object_detection.utils import \
+    visualization_utils as vis_util
 
-from imutils.video import VideoStream
-from imutils.video import FPS
-import argparse
-import imutils
-import time
+sys.path.append("..")
+
+
+
 
 def objdetectionfunc(urlll, id, model_name, pbtxt_name):
 
@@ -113,7 +115,3 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
             cap.release()
             out.release()
             cv2.destroyAllWindows()
-
-                        
-
-                        

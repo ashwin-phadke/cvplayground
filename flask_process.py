@@ -1,8 +1,9 @@
 import os
-from codes.video_objdet import objdetectionfunc
-from pathlib import Path
-import uuid
 import sqlite3
+import uuid
+from pathlib import Path
+
+from codes.video_objdet import objdetectionfunc
 
 
 def convert_ret_tuple(tup):

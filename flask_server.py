@@ -1,18 +1,18 @@
-import os
-from flask import Flask, flash, request, redirect, url_for, send_from_directory, send_file
-from werkzeug.utils import secure_filename
-import os
-import urllib.request
-import subprocess
-#from webapp import app
-from flask import render_template, make_response
-from werkzeug.utils import secure_filename
-from pathlib import Path
-import uuid
-import sqlite3
 import datetime
-import time
 import logging
+import os
+import sqlite3
+import subprocess
+import time
+import urllib.request
+import uuid
+from pathlib import Path
+
+#from webapp import app
+from flask import (Flask, flash, make_response, redirect, render_template,
+                   request, send_file, send_from_directory, url_for)
+from werkzeug.utils import secure_filename
+
 import flask_process
 
 UPLOAD_FOLDER = 'uploads'
