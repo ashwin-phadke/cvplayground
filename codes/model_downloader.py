@@ -2,8 +2,10 @@ import tensorflow as tf
 import urllib
 import tarfile
 import os
+from os import chdir
 import wget
 
+from pathlib import Path
 
 download_model_list = ["ssd_mobilenet_v2_coco_2018_03_29", "ssd_inception_v2_coco_2017_11_17",
  "faster_rcnn_inception_v2_coco_2018_01_28", "faster_rcnn_resnet50_coco",
@@ -16,16 +18,17 @@ def download_model(model_name):
     base_url = 'http://download.tensorflow.org/models/object_detection/'
     model_file = base_url + model_name +  '.tar.gz'
     print("Downloading {} model".format(model_name))
-    path = os.getcwd()
-    abc = os.path.join(os.path.dirname(path) , 'detect_models/' , model_name + '.tar.gz')
-    #wget.download(model_file, os.path.join(os.path.dirname(path) , 'detect_models/' , model_name + '.tar.gz'))
-
-    path_to_model_file = os.path.join(os.path.dirname(path) , 'detect_models/' , model_name + '.tar.gz')
+    path = Path('..')
+    chdir(path)
+    model_path = os.path.join(os.getcwd(), 'detect_models/')
+    download_model_path = os.path.join(model_path , model_name + '.tar.gz')
+    wget.download(model_file, download_model_path)
+    path_to_model_file = os.path.join(model_path , model_name + '.tar.gz')
     tar_file = tarfile.open(path_to_model_file)
     for file in tar_file.getmembers():
         file_name = os.path.basename(file.name)
         if 'frozen_inference_graph.pb' in file_name:
-            tar_file.extract(file, model_file)
+            tar_file.extract(file, os.path.join(model_path , model_name))
 
 
     return str(os.getcwd())
