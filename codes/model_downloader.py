@@ -23,24 +23,18 @@ def download_model(model_name):
     model_path = os.path.join(os.getcwd(), 'detect_models/')
     download_model_path = os.path.join(model_path , model_name + '.tar.gz')
     wget.download(model_file, download_model_path)
-    path_to_model_file = os.path.join(model_path , model_name + '.tar.gz')
-    tar_file = tarfile.open(path_to_model_file)
+    tar_file = tarfile.open(download_model_path)
     for file in tar_file.getmembers():
         file_name = os.path.basename(file.name)
         if 'frozen_inference_graph.pb' in file_name:
             tar_file.extract(file, os.path.join(model_path , model_name))
 
 
-    return str(os.getcwd())
-
-
+    return model_name
 
 for model_name in download_model_list:
     PATH_TO_MODEL_DIR = download_model(model_name)
     print("Downloaded {}", PATH_TO_MODEL_DIR)
-
-
-   
 
 # # Download labels file
 # def download_labels(filename):
