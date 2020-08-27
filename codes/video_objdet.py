@@ -110,8 +110,6 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
         out_img = cv2.resize(img, (640, 480))
         out.write(out_img)
         cv2.imshow('img', out_img)
-    
-        if cv2.waitKey(25) & 0xFF == ord('q'):
-            cap.release()
-            out.release()
-            cv2.destroyAllWindows()
+    cap.release()
+    out.release()
+    cv2.destroyAllWindows()
