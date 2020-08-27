@@ -10,6 +10,9 @@ A computer vision playground to try and test end to end(test to deploy) computer
 
  **To contribute, create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
 
+
+**Update** : A new and easy way to download models is now available in codes/model_downloader.py to easily download and extract multiple models from tensorflow model zoo.
+
 App 1 : 
 
 This app facilitates the user to just upload any desired video and check the detection accuracy based on the user selected Tensorflow model from model zoo without having to go through writing code for such commom task and can then make appropriate decision in the choice of the right model hence saving important development time.
@@ -60,11 +63,17 @@ ________________________________________________________________________________
 
     - Check to see if the following structure exists else create the following directory structure : 
     ![Directory Structure](dir_struct.jpg?raw=true "Title")
+
     - The downloads folder will host all the processed files for sending the user to download and uploads for saving uploaded files.
-    - The models folder is from the tensorflow models directory, you only need object detection folder from that.
-    - codes has the main video object detection code.
+
+    - codes has the main video object detection code and model downloader with requirements for the tensorflow object detection api
+    in the models sub directory.
+
     - db has the database sqlite file.
+
     - templates has the web HTML templates for user interaction.
+
+    - detect_models hosts the model .pb and .pbtxt files for the desired model to use. Refer model_downloader.py to download the models in this directory.
 
     ### Installation :
 
