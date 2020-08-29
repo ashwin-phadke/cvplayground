@@ -83,7 +83,7 @@ ________________________________________________________________________________
 
       command to install all the necessary requirements needed to run this project.
 
-    - Use the model_downloader.py file. You can download all the models using this file to perform object detection with.
+    - Use the model_downloader.py file. You can download all the models using this file to perform object detection with. You can also select which models to download using the list at the very beginning of the script.
 
     - Create a `sqlite` database file inside `db` giving the name you wish. The project uses `cvplayground.sqlite` for simplicity.
 
