@@ -83,6 +83,8 @@ ________________________________________________________________________________
 
       command to install all the necessary requirements needed to run this project.
 
+    - Use the model_downloader.py file
+
     - Create a `sqlite` database file inside `db` giving the name you wish. The project uses `cvplayground.sqlite` for simplicity.
 
     - Execute the below `create` statement to create the necessary tables inside the databse created.
