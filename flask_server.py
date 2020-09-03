@@ -30,23 +30,27 @@ logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
 app.secret_key = "secret key"
 
 model_dict = {
-    "ssdmv2i": ("ssd_mobilenet_v2_coco","mobilenet.pbtxt"),
+    "ssdmv2i": ("ssd_mobilenet_v2_coco", "mobilenet.pbtxt"),
     "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssdinceptionv2.pbtxt"),
-    "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28","frcnninceptionv2.pbtxt"),
+    "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "frcnninceptionv2.pbtxt"),
     "ssdmv2": ("faster_rcnn_resnet50_coco", "frcnnresnet50.pbtxt")
 }
+
 
 def generate_uuid():
     new_id = uuid.uuid4()
     logging.info('UUID created')
     return new_id
 
+
 def date_time():
     time_string = time.strftime("%m/%d/%Y, %H:%M:%S",)
     return time_string
 
+
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower()
+
 
 @app.route('/')
 def upload_form():
@@ -57,9 +61,11 @@ def upload_form():
 # 	if request.method == 'POST':
 # 		return url_for(upload_file)
 
+
 @app.route('/upload_page', methods=['GET', 'POST'])
 def show_form():
     return render_template('upload.html')
+
 
 @app.route('/uploads', methods=['POST'])
 def upload_file():
@@ -120,6 +126,7 @@ def download_file(filename):
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

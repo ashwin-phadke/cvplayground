@@ -28,5 +28,6 @@ def process_video():
     conn.close()
     return id
 
+
 if __name__ == "__main__":
     process_video()
