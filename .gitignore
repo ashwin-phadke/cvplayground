@@ -133,14 +133,8 @@ downloadse8d49e39-3d6a-4a54-97ee-f1514ee24cd0.avi
 uploads/*
 downloads/
 db/cvplayground.sqlite
-faster_rcnn_inception_v2_coco_2018_01_28/checkpoint
-faster_rcnn_inception_v2_coco_2018_01_28/frozen_inference_graph.pb
-faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt.data-00000-of-00001
-faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt.index
-faster_rcnn_inception_v2_coco_2018_01_28/model.ckpt.meta
-faster_rcnn_inception_v2_coco_2018_01_28/pipeline.config
-faster_rcnn_inception_v2_coco_2018_01_28/resnet.pbtxt
-faster_rcnn_inception_v2_coco_2018_01_28/saved_model/saved_model.pb
 static/*
 templates/temp.html
 db/*
+detect_models/ssd_mobilenet_v2_coco_2018_03_29.tar.gzhptffx56.tmp
+detect_models/faster_rcnn_inception_v2_coco_2018_01_28
