@@ -1,14 +1,16 @@
 Contributions are welcome for :
 
+Good first issues : 
 - Package to publish on [PyPi](pypi.org)
+- Handle dynamamic directory updation.
 
 App 1 
+
 - Improving web UI.
 - Adding support for more models based on TensorFlow.
 - Extending the application.
 - Use TensorFlow sessions in a better way rather than subprocess.
 - Attach a video player alongwith the download button so the user can check the procesed video right in the browser.
-
 
 General Contributions include :
 
