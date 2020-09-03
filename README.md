@@ -83,7 +83,7 @@ ________________________________________________________________________________
 
       command to install all the necessary requirements needed to run this project.
 
-    - Use the model_downloader.py file. You can download all the models using this file to perform object detection with. 
+    - Use the `model_downloader.py file` . You can download all the models using this file to perform object detection with. 
     You can also select which models to download using the list at the very beginning of the script. 
     the script will automatically download models to the detect_models directory and unzip them as shown in the directory structure.
 
@@ -103,6 +103,8 @@ ________________________________________________________________________________
      )
 
     ```
+
+    OR simply go to `codes/db_create.py` and let it do all the work for you.
     - Open a terminal and execute 
 
         ``` python flask_server.py ```     
