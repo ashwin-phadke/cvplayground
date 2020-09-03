@@ -8,6 +8,24 @@ from pathlib import Path
 import tensorflow as tf
 import wget
 
+import logging
+
+logger = logging.getLogger('model_downloader logging')
+logger.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
+
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
+
 
 # List of model files to download, this list comprises of the most common models used. To add your model simply go
 # to https://github.com/tensorflow/models/blob/archive/research/object_detection/g3doc/tf1_detection_zoo.md and select the name of your
