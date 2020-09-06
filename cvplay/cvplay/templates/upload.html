@@ -1,0 +1,92 @@
+<!doctype html>
+<title>TF test</title>
+<head>
+	<!-- include the CSS files -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+
+<!-- include the JavaScript files -->
+<!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+</head>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul class=flashes>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<div class="box">
+<form method="post" action="/uploads" enctype="multipart/form-data">
+    <dl>
+			<h2>Select the model you want to perform object detection with. </h2>
+			<select name="model" id="model" required>
+				<option disabled selected value> -- Select an option -- </option>
+				<option value="ssdmv2">SSD MobileNet v2 COCO</option>
+				<option value="ssdiv2">SSD Inception v2 COCO</option>
+				<option value="frcnnv2">Faster RCNN Inception v2 COCO</option>
+				<option value="ssdmv2">SSD MobileNet v2 COCO</option>
+			  </select>
+			  <p>
+				<h2>Select a file to upload</h2>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+	</dl>
+
+<!-- 	
+	TO BE IMPLEMENTED AT A LATER STAGE
+	<div class="form-check list-inline list-group-horizontal btn-group" role="group" data-toggle="buttons"> 
+
+
+		<label class="btn btn-light">
+		  Item 1<input type="checkbox" name ="classselectcheckbox" value="item1" class="form-check list-group-item">
+		</label>
+		<label class="btn btn-light">
+			Item 1 <input type="checkbox" name ="classselectcheckbox" value="item2" class="form-check list-group-item">
+		</label>
+		<label class="btn btn-light">
+			Item 1 <input type="checkbox"  name ="classselectcheckbox" value="item3" class="form-check list-group-item">
+		</label>
+		<label class="btn btn-light">
+			Item 1 <input type="checkbox"  name ="classselectcheckbox" value="item4" class="form-check list-group-item">
+		</label>
+	  </div>
+	  <style>
+	  .list-group-horizontal .list-group-item {
+		display: inline-block;
+		
+	}
+	.list-group-horizontal .list-group-item:focus {
+		display: inline-block;
+		color:#fff;
+		background-color: #41AADA !important; 
+	}
+	
+	.list-group-horizontal .list-group-item {
+		margin-bottom: 0;
+		margin-left:-4px;
+		margin-right: 0;
+	   
+	}
+	.list-group-horizontal .list-group-item:first-child {
+		border-top-right-radius:0;
+		border-bottom-left-radius:4px;
+	   
+	}
+	.list-group-horizontal .list-group-item:last-child {
+		border-top-right-radius:4px;
+		border-bottom-left-radius:0;
+		
+	}
+</style> -->
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+
+</form>
+</div>

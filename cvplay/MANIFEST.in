@@ -1,0 +1,6 @@
+recursive-include cvplay/templates *.html
+recursive-include cvplay/templates *.png
+recursive-include cvplay/codes *.py
+recursive-include cvplay/readme_assets *.png
+recursive-include cvplay/static *.html
+recursive-include cvplay/static *.png
