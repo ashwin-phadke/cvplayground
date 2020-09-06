@@ -9,8 +9,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Python
-        working-directory: cvplay
+      - uses: actions/checkout@v2
+      - name: Change to directory
+        run: |
+          cd cvplay
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
