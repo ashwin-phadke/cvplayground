@@ -10,17 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Change to directory
-        run: |
-          cd cvplay
+      - name: Change directory
+        working-directory: ./cvplay
       - name: Install dependencies
+        working-directory: ./cvplay
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel twine
       - name: Build and publish
+        working-directory: ./cvplay
         env:
-          TWINE_USERNAME: ${{ secrets.ashwin-phadke }}
-          TWINE_PASSWORD: ${{ secrets.pypi-AgENdGVzdC5weXBpLm9yZwIkNzE5ODMyYTgtMzRiYy00MTJkLTljZTAtNzEzNGM1ZjJjOGQ2AAJLeyJwZXJtaXNzaW9ucyI6IHsicHJvamVjdHMiOiBbImN2cGxheWdyb3VuZC1hc2h3aW4tcGhhZGtlIl19LCAidmVyc2lvbiI6IDF9AAAGIN5jy8mMD2vZV_gdwgjvLBF_rbra5Xooi3sjOaJqzRsh }}
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
         run: |
           python setup.py sdist bdist_wheel
-          twine upload dist/*
+          twine upload testpypi dist/* 
