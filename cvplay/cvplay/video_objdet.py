@@ -32,6 +32,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                     help="minimum probability to filter weak detections")
     args = vars(ap.parse_args())
 
+    #define save paths and path to models and it's pbtxt files
     VID_SAVE_PATH = 'static/'
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
