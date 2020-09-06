@@ -23,7 +23,7 @@ from cvplay.codes.models.research.object_detection.utils import \
 from cvplay.model_downloader import start_model_download as smd
 sys.path.append("..")
 
-
+# Object detection function
 def objdetectionfunc(urlll, id, model_name, pbtxt_name):
 
     # construct the argument parse and parse the arguments
