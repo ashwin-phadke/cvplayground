@@ -39,9 +39,6 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
     PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name, pbtxt_name)
 
-    if not os.path.exists(PATH_TO_CKPT) and os.path.exists(PATH_TO_PBTXT):
-        smd()
-
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                   "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
