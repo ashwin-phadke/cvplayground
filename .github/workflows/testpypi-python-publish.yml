@@ -11,6 +11,9 @@ jobs:
       run:
         working-directory: ./cvplay   # job level working directory
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.5, 3.6, 3.7, 3.8]
     steps:
       - uses: actions/checkout@v2
         with:
