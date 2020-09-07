@@ -7,18 +7,17 @@ on: [push]
 
 jobs:
   deploy:
+    defaults:
+      run:
+        working-directory: ./cvplay   # job level working directory
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Change directory
-        working-directory: ./cvplay
       - name: Install dependencies
-        working-directory: ./cvplay
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel twine
       - name: Build and publish
-        working-directory: ./cvplay
         env:
           TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
           TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
