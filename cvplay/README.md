@@ -62,6 +62,26 @@ ________________________________________________________________________________
 
     - detect_models hosts the model .pb and .pbtxt files for the desired model to use. Refer model_downloader.py to download the models in this directory.
 
+    - Download the desired model and it's protoxt files from the link below and put them in detect_models folder.
+
+    | Model Version  |  Version   |   Weights(.pb)   |   prototxt(.pbtxt)    |
+    |----------|:-------------:|------:|-----:|
+    |MobileNet-SSD v1 | 2017\_11\_17 | [weights](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2017_11_17.tar.gz) | [config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/ssd_mobilenet_v1_coco_2017_11_17.pbtxt) 
+    |MobileNet-SSD v1 PPN |2018\_07\_03| [weights](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_ppn_shared_box_predictor_300x300_coco14_sync_2018_07_03.tar.gz) |[config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/ssd_mobilenet_v1_ppn_coco.pbtxt) 
+    |MobileNet-SSD v2| 2018\_03\_29 |[weights](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v2_coco_2018_03_29.tar.gz) |[config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/ssd_mobilenet_v2_coco_2018_03_29.pbtxt)|
+    |Inception-SSD v2 |2017\_11\_17| [weights](http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_2017_11_17.tar.gz) |[config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/ssd_inception_v2_coco_2017_11_17.pbtxt) |
+    |MobileNet-SSD v3 (see [\#16760](https://github.com/opencv/opencv/pull/16760)) |2020\_01\_14 |[weights](http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v3_large_coco_2020_01_14.tar.gz) |[config](https://gist.github.com/dkurt/54a8e8b51beb3bd3f770b79e56927bd7) |
+    |Faster-RCNN Inception v2| 2018\_01\_28 |[weights](http://download.tensorflow.org/models/object_detection/faster_rcnn_inception_v2_coco_2018_01_28.tar.gz) |[config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/faster_rcnn_inception_v2_coco_2018_01_28.pbtxt) |
+    |Faster-RCNN ResNet-50 |2018\_01\_28 |[weights](http://download.tensorflow.org/models/object_detection/faster_rcnn_resnet50_coco_2018_01_28.tar.gz)| [config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/faster_rcnn_resnet50_coco_2018_01_28.pbtxt)|
+    |Mask-RCNN Inception v2| 2018\_01\_28| [weights](http://download.tensorflow.org/models/object_detection/mask_rcnn_inception_v2_coco_2018_01_28.tar.gz)| [config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/mask_rcnn_inception_v2_coco_2018_01_28.pbtxt)|
+    |EfficientDet-D0 |(see [\#17384](https://github.com/opencv/opencv/pull/17384))  | [weights](https://www.dropbox.com/s/9mqp99fd2tpuqn6/efficientdet-d0.pb?dl=1)| [config](https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/efficientdet-d0.pbtxt) |
+
+
+    Furthermore, if you would like to convert your own models you can refer the following scripts for a better context to how to get the required files.
+    * [tf\_text\_graph\_ssd.py](https://github.com/opencv/opencv/blob/master/samples/dnn/tf_text_graph_ssd.py)
+    * [tf\_text\_graph\_common.py](https://github.com/opencv/opencv/blob/master/samples/dnn/tf_text_graph_common.py)
+    * [tf\_text\_graph\_faster\_rcnn.py](https://github.com/opencv/opencv/blob/master/samples/dnn/tf_text_graph_faster_rcnn.py)
+    * [tf\_text\_graph\_mask\_rcnn.py](https://github.com/opencv/opencv/blob/master/samples/dnn/tf_text_graph_mask_rcnn.py)
 
   ### Installation via Pip:
     - Almost all of your work is already done.
