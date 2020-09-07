@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 
 setup(name='cvplayground-ashwin-phadke',
-      version='0.2.0',
+      version='0.2.2',
       description='Test repo pacakge print',
       long_description=long_description,
       long_description_content_type="text/markdown",
@@ -20,9 +20,10 @@ setup(name='cvplayground-ashwin-phadke',
         "Operating System :: OS Independent",
       ],
       install_requires=[
-          'markdown', 'opencv_python', 'tensorflow', 'gunicorn', 'numpy',
-          'six', 'matplotlib', 'asposestorage', 'Pillow', 'Flask',
-          'werkzeug', 'imutils'
+          'opencv_python>=4.0=', 'tensorflow>=2.0', 'gunicorn>=20.0', 'numpy>=1.18',
+          'six>=1.14', 'matplotlib>=3.3.0', 'asposestorage>=1.0',
+          'Pillow>=7.1.2', 'Flask>=1.1',
+          'werkzeug>=1.0', 'imutils>=0.2'
       ],
       include_package_data=True,
       zip_safe=False)
