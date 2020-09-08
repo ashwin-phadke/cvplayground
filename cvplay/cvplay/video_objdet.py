@@ -20,9 +20,17 @@ from PIL import Image
 from cvplay.codes.models.research.object_detection.utils import label_map_util
 from cvplay.codes.models.research.object_detection.utils import \
     visualization_utils as vis_util
-from cvplay.model_downloader import start_model_download as smd
+# from cvplay.model_downloader import download_model
+from cvplay import model_downloader
 sys.path.append("..")
+# Do necessary imports
 
+import tarfile
+import urllib
+from os import chdir
+from pathlib import Path
+import wget
+import logging
 # Object detection function 
 def objdetectionfunc(urlll, id, model_name, pbtxt_name):
 
@@ -36,9 +44,12 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     VID_SAVE_PATH = 'static/'
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
+
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
     PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name, pbtxt_name)
-
+    if not os.path.exists(PATH_TO_CKPT):
+        model_downloader.download_model(model_name, pbtxt_name)
+    print(PATH_TO_CKPT)
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                   "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
@@ -54,9 +65,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
 
     CLASSES = classes_90  # New list of classess with 90 classess.
     print(CLASSES)
-
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
-
     cvNet = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT)
 
     # Change only if you have more than one webcams
