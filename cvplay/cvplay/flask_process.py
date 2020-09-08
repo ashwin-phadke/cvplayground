@@ -3,7 +3,7 @@ import sqlite3
 import uuid
 from pathlib import Path
 
-from cvplay.video_objdet import objdetectionfunc
+from video_objdet import objdetectionfunc
 #from codes.video_objdet import objdetectionfunc
 
 

@@ -13,8 +13,9 @@ from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-from cvplay import flask_process
-#import flask_process
+#from cvplay import flask_process
+#from cvplay import flask_process
+import flask_process
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -24,19 +25,23 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 # app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+# logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
+#                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 app.secret_key = "secret key"
 
-model_dict = {
-    "ssdmv2i": ("ssd_mobilenet_v2_coco", "mobilenet.pbtxt"),
-    "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssdinceptionv2.pbtxt"),
-    "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "frcnninceptionv2.pbtxt"),
-    "ssdmv2": ("faster_rcnn_resnet50_coco", "frcnnresnet50.pbtxt")
-}
+# model_dict = {
+#     "ssdmv2i": ("ssd_mobilenet_v2_coco", "mobilenet.pbtxt"),
+#     "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssdinceptionv2.pbtxt"),
+#     "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "frcnninceptionv2.pbtxt"),
+#     "ssdmv2": ("faster_rcnn_resnet50_coco", "frcnnresnet50.pbtxt")
+# }
 
+model_dict = {"ssdmv2i": ("ssd_mobilenet_v2_coco_2018_03_29", "ssd_mobilenet_v2_coco_2018_03_29.pbtxt"),
+                 "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssd_inception_v2_coco_2017_11_17.pbtxt"),
+                 "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt"),
+                 "ssdmv2": ("faster_rcnn_resnet50_coco", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt")}
 
 def generate_uuid():
     new_id = uuid.uuid4()
@@ -128,10 +133,11 @@ def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
 
+
 def package_main():
     app.run(debug=True)
 
 
 if __name__ == "__main__":
     package_main()
-    #app.run(debug=True)
+    # app.run(debug=True)
