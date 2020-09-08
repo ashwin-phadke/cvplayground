@@ -7,25 +7,25 @@ from os import chdir
 from pathlib import Path
 
 #import tensorflow as tf
-import logging
+# import logging
 
 
-logger = logging.getLogger('model_downloader logging')
-logger.setLevel(logging.DEBUG)
+# logger = logging.getLogger('model_downloader logging')
+# logger.setLevel(logging.DEBUG)
 
-# create console handler and set level to debug
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
+# # create console handler and set level to debug
+# ch = logging.StreamHandler()
+# ch.setLevel(logging.INFO)
 
-# create formatter
-formatter = logging.Formatter(
-    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# # create formatter
+# formatter = logging.Formatter(
+#     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# add formatter to ch
-ch.setFormatter(formatter)
+# # add formatter to ch
+# ch.setFormatter(formatter)
 
-# add ch to logger
-logger.addHandler(ch)
+# # add ch to logger
+# logger.addHandler(ch)
 
 
 # List of model files to download, this list comprises of the most common models used. To add your model simply go
@@ -56,8 +56,10 @@ def download_model(model_name, pbtxt_name):
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
     print("Done")
 
-if __name__ == "__main__":
-    model_name = "ssd_mobilenet_v2_coco_2018_03_29"
-    pbtxt_name = "ssd_mobilenet_v2_coco_2018_03_29.pbtxt"
+# if __name__ == "__main__":
+#     model_name = "ssd_mobilenet_v2_coco_2018_03_29"
+#     pbtxt_name = "ssd_mobilenet_v2_coco_2018_03_29.pbtxt"
 
-    download_model(model_name, pbtxt_name)
+#     download_model(model_name, pbtxt_name)
+if __name__ == "__main__":
+    print("Here")

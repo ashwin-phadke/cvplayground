@@ -17,11 +17,12 @@ from imutils.video import FPS, VideoStream
 from matplotlib import pyplot as plt
 from PIL import Image
 
-from cvplay.codes.models.research.object_detection.utils import label_map_util
-from cvplay.codes.models.research.object_detection.utils import \
+from codes.models.research.object_detection.utils import label_map_util
+from codes.models.research.object_detection.utils import \
     visualization_utils as vis_util
 # from cvplay.model_downloader import download_model
-from cvplay import model_downloader
+#from cvplay import model_downloader
+from model_downloader import download_model
 sys.path.append("..")
 # Do necessary imports
 
@@ -45,10 +46,10 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
 
-    PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', INFERENCE)
-    PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name, pbtxt_name)
+    PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', model_name, INFERENCE)
+    PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
     if not os.path.exists(PATH_TO_CKPT):
-        model_downloader.download_model(model_name, pbtxt_name)
+        download_model(model_name, pbtxt_name)
     print(PATH_TO_CKPT)
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
