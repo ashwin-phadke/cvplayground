@@ -51,15 +51,10 @@ def download_model(model_name, pbtxt_name):
     os.remove(download_model_path)
 
     download_label_path = os.path.join(model_path, model_name , model_name, pbtxt_name)
-    label_base_url = 'https://github.com/opencv/opencv_extra/blob/master/testdata/dnn/'
+    label_base_url = 'https://raw.githubusercontent.com/opencv/opencv_extra/master/testdata/dnn/'
     pbtxt_file = label_base_url + pbtxt_name
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
-    print("Done")
+    print("Comleted Downloading model and config files")
 
-# if __name__ == "__main__":
-#     model_name = "ssd_mobilenet_v2_coco_2018_03_29"
-#     pbtxt_name = "ssd_mobilenet_v2_coco_2018_03_29.pbtxt"
-
-#     download_model(model_name, pbtxt_name)
 if __name__ == "__main__":
-    print("Here")
+    print("main")
