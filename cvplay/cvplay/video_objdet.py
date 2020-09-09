@@ -17,12 +17,12 @@ from imutils.video import FPS, VideoStream
 from matplotlib import pyplot as plt
 from PIL import Image
 
-from codes.models.research.object_detection.utils import label_map_util
-from codes.models.research.object_detection.utils import \
+from cvplay.codes.models.research.object_detection.utils import label_map_util
+from cvplay.codes.models.research.object_detection.utils import \
     visualization_utils as vis_util
 # from cvplay.model_downloader import download_model
 #from cvplay import model_downloader
-from model_downloader import download_model
+from cvplay.model_downloader import download_model
 sys.path.append("..")
 # Do necessary imports
 

@@ -59,7 +59,9 @@ def main():
     database_name = 'cvplayground.sqlite'
     path = Path('..')
     chdir(path)
-    database = os.path.join(os.getcwd(), 'db/', database_name)
+    #database = os.path.join(os.getcwd(), 'db/', database_name)
+    os.umask(0)
+    database = os.makedirs(os.path.join('db/', database_name))
     logger.info("Database created, creating required tables..")
 
     sqlite_create_cvp_table = """  CREATE TABLE IF NOT EXISTS uploads (

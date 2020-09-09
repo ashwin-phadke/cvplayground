@@ -13,9 +13,9 @@ from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-#from cvplay import flask_process
-#from cvplay import flask_process
-import flask_process
+#from flask_process import process_video
+from cvplay.flask_process import process_video
+from cvplay.db_create import main
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -112,7 +112,7 @@ def upload_file():
             conn.commit()
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
-            flask_process.process_video()
+            process_video()
             filename = new_uuid + '.mp4'
             time.sleep(5)
             return redirect('/downloadfile/' + filename)

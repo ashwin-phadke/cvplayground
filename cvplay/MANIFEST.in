@@ -4,3 +4,5 @@ recursive-include cvplay/codes *.py
 recursive-include cvplay/readme_assets *.png
 recursive-include cvplay/static *.html
 recursive-include cvplay/static *.png
+recursive-include cvplay/ *.py
+recursive-include cvplay/db *.sqlite

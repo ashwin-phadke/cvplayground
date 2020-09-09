@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
-setup(name='cvplayground',
-      version='0.3.0a',
+setup(name='cvplay',
+      version='0.3.1a2',
       description='A computer vision playground to try and test(from test to deploy) object detection computer vision pipeline. ',
       long_description=long_description,
       long_description_content_type="text/markdown",
