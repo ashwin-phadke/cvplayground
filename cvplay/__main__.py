@@ -1,0 +1,1 @@
+from cvplay import flask_server
