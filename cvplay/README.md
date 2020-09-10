@@ -118,7 +118,8 @@ ________________________________________________________________________________
 	"isProcessed"	INTEGER,
 	"location"	TEXT,
 	"datetime"	TEXT,
-	"model_name"	TEXT
+	"model_name"	TEXT,
+  "pbtxt_name"  TEXT
      )
 
     ```
