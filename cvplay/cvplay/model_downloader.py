@@ -6,26 +6,26 @@ from urllib import request
 from os import chdir
 from pathlib import Path
 
-#import tensorflow as tf
-# import logging
+import tensorflow as tf
+import logging
 
 
-# logger = logging.getLogger('model_downloader logging')
-# logger.setLevel(logging.DEBUG)
+logger = logging.getLogger('model_downloader logging')
+logger.setLevel(logging.DEBUG)
 
-# # create console handler and set level to debug
-# ch = logging.StreamHandler()
-# ch.setLevel(logging.INFO)
+# create console handler and set level to debug
+ch = logging.StreamHandler()
+ch.setLevel(logging.INFO)
 
-# # create formatter
-# formatter = logging.Formatter(
-#     '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+# create formatter
+formatter = logging.Formatter(
+    '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-# # add formatter to ch
-# ch.setFormatter(formatter)
+# add formatter to ch
+ch.setFormatter(formatter)
 
-# # add ch to logger
-# logger.addHandler(ch)
+# add ch to logger
+logger.addHandler(ch)
 
 
 # List of model files to download, this list comprises of the most common models used. To add your model simply go
@@ -50,11 +50,13 @@ def download_model(model_name, pbtxt_name):
             tar_file.extract(file, os.path.join(model_path, model_name))
     os.remove(download_model_path)
 
-    download_label_path = os.path.join(model_path, model_name , model_name, pbtxt_name)
+    download_label_path = os.path.join(
+        model_path, model_name, model_name, pbtxt_name)
     label_base_url = 'https://raw.githubusercontent.com/opencv/opencv_extra/master/testdata/dnn/'
     pbtxt_file = label_base_url + pbtxt_name
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
     print("Comleted Downloading model and config files")
+
 
 if __name__ == "__main__":
     print("main")

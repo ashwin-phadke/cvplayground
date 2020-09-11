@@ -4,7 +4,6 @@ import uuid
 from pathlib import Path
 
 from cvplay.video_objdet import objdetectionfunc
-#from codes.video_objdet import objdetectionfunc
 
 
 def convert_ret_tuple(tup):
