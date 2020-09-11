@@ -1,3 +1,4 @@
+import json
 import datetime
 import logging
 import os
@@ -31,17 +32,12 @@ app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
 app.secret_key = "secret key"
 
-# model_dict = {
-#     "ssdmv2i": ("ssd_mobilenet_v2_coco", "mobilenet.pbtxt"),
-#     "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssdinceptionv2.pbtxt"),
-#     "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "frcnninceptionv2.pbtxt"),
-#     "ssdmv2": ("faster_rcnn_resnet50_coco", "frcnnresnet50.pbtxt")
-# }
-
 model_dict = {"ssdmv2i": ("ssd_mobilenet_v2_coco_2018_03_29", "ssd_mobilenet_v2_coco_2018_03_29.pbtxt"),
-                 "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssd_inception_v2_coco_2017_11_17.pbtxt"),
-                 "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt"),
-                 "ssdmv2": ("faster_rcnn_resnet50_coco", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt")}
+              "ssdiv2": ("ssd_inception_v2_coco_2017_11_17", "ssd_inception_v2_coco_2017_11_17.pbtxt"),
+              "frcnnv2": ("faster_rcnn_inception_v2_coco_2018_01_28", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt"),
+              "frcnnr50": ("faster_rcnn_resnet50_coco_2018_01_28", "faster_rcnn_resnet50_coco_2018_01_28.pbtxt"),
+              "mrcnniv2": ("mask_rcnn_inception_v2_coco_2018_01_28", "mask_rcnn_inception_v2_coco_2018_01_28")}
+
 
 def generate_uuid():
     new_id = uuid.uuid4()
@@ -132,8 +128,7 @@ def download_file(filename):
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
-
-
+    
 def package_main():
     app.run(debug=True)
 
