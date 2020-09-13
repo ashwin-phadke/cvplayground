@@ -12,7 +12,8 @@
     <title>Carousel Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="bootstrap.min.css" rel="stylesheet"> -->
+    <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -28,7 +29,7 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
-    <link href="carousel.css" rel="stylesheet">
+    <link href="{{url_for('static', filename = 'css/carousel.css')}}" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -84,7 +85,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-          <img class="first-slide" src="Downloads/tensorflow2objectdetection(1).png" alt="First slide">
+          <img class="first-slide" src="{{url_for('static', filename = 'images/tensorflow2objectdetection.png')}}" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>Object Detection</h1>
@@ -135,15 +136,15 @@
       <div class="row">
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-          <img class="img-thumbnail" src="Github/cvplayground/cvplay/cvplay/static/image.png" alt="Generic placeholder image" width="200" height="200">
+          <img class="img-thumbnail" src="{{url_for('static', filename = 'images/image.png')}}" alt="Generic placeholder image" width="200" height="200">
           <h2>TF Object Detection API</h2>
           <p>Get started with your object detection models search using models built using Object Detection API from Tensorflow. These models are from the model zoo and models from TensorFLow v2 will be made available soon.</p>
-          <p><a href="#" class="btn btn-primary" role="button">Start App</a> 
+          <p><a href="{{ url_for('show_form') }}" class="btn btn-primary" role="button">Start App</a> 
         </div>
         </div><!-- /.col-lg-4 -->
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-          <img class="img-thumbnail" src="Downloads/task-0000000003-618f95fc.jpg" alt="Generic placeholder image" width="200" height="200">
+          <img class="img-thumbnail" src="{{url_for('static', filename = 'images/task-0000000003-618f95fc.jpg')}}" alt="Generic placeholder image" width="200" height="200">
           <h2>Segmentation</h2>
           <p>Ever wondered what those many Segmentation models do in different way? No more, try out various segmentation models and test the ones that fit best to your data</p>
           <p><a href="#" class="btn btn-primary" role="button">Start App</a> 
@@ -170,7 +171,7 @@
           <p class="lead"> We serve all the models through Flask backend and some API's to make your processing faster.</p>
         </div>
         <div class="col-md-5">
-          <img src="/home/aphadke/Downloads/Deep-Learning-course-logo.png" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img src="{{url_for('static', filename = 'images/Deep-Learning-course-logo.png')}}" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -181,7 +182,7 @@
           <h2 class="featurette-heading">Getting better results<span class="text-muted"></span></h2><p class="lead"> We try to serve the best models available out there so you can make better decisions on choosing the right model for you next deep learning application.</p>
         </p></div>
         <div class="col-md-5 col-md-pull-7">
-          <img src="/home/aphadke/Github/cvplayground/cvplay/cvplay/templates/image.png" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img src="{{url_for('static', filename = 'images/image.png')}}" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -193,7 +194,7 @@
           <p class="lead"> - we believe stuff we built using open source should as well be open source(well fully, partly, whatever). We love contributors and are always on a lookout for PR's, go ahead make and break our code and help us improve or just say a hello to the developers involved.</p>
         </div>
         <div class="col-md-5">
-          <img src="/home/aphadke/Downloads/unnamed(1).png" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img src="{{url_for('static', filename = 'images/unnamed(1).png')}}" class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -216,7 +217,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../../assets/js/vendor/holder.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
