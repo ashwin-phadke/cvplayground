@@ -121,7 +121,7 @@ def upload_file():
 
 @app.route("/downloadfile/<filename>", methods=['GET'])
 def download_file(filename):
-    return render_template('download.html', value=filename)
+    return render_template('downloadindex.html', value=filename)
 
 
 @app.route('/return-files/<filename>')
