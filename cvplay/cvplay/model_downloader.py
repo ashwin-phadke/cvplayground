@@ -49,13 +49,16 @@ def download_model(model_name, pbtxt_name):
         if 'frozen_inference_graph.pb' in file_name:
             tar_file.extract(file, os.path.join(model_path, model_name))
     os.remove(download_model_path)
-
+    INFERENCE = 'frozen_inference_graph.pb'
     download_label_path = os.path.join(
         model_path, model_name, model_name, pbtxt_name)
+    downloaded_model_path = os.path.join(
+        model_path, model_name, model_name, INFERENCE)
     label_base_url = 'https://raw.githubusercontent.com/opencv/opencv_extra/master/testdata/dnn/'
     pbtxt_file = label_base_url + pbtxt_name
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
     print("Comleted Downloading model and config files")
+    return(downloaded_model_path, download_label_path)
 
 
 if __name__ == "__main__":
