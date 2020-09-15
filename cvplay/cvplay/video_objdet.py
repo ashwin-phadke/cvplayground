@@ -47,10 +47,10 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     INFERENCE = 'frozen_inference_graph.pb'
 
     PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', model_name, INFERENCE)
-    PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
+    #PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
     if not os.path.exists(PATH_TO_CKPT):
-        download_model(model_name, pbtxt_name)
-    print(PATH_TO_CKPT)
+        path_to_model, path_to_pbtxt = download_model(model_name, pbtxt_name)
+    print(path_to_model, path_to_pbtxt)
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                   "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
@@ -67,7 +67,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
     CLASSES = classes_90  # New list of classess with 90 classess.
     print(CLASSES)
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
-    cvNet = cv2.dnn.readNetFromTensorflow(PATH_TO_CKPT, PATH_TO_PBTXT)
+    cvNet = cv2.dnn.readNetFromTensorflow(path_to_model, path_to_pbtxt)
 
     # Change only if you have more than one webcams
     cap = cv2.VideoCapture(urlll)
