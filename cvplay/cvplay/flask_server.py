@@ -66,10 +66,10 @@ def upload_form():
 
 @app.route('/upload_page', methods=['GET', 'POST'])
 def show_form():
-    return render_template('upload.html')
+    return render_template('modelselectindex.html')
 
 
-@app.route('/uploads', methods=['POST'])
+@app.route('/uploads', methods=['POST', 'GET'])
 def upload_file():
     if request.method == 'POST':
         ip_address = request.remote_addr
@@ -82,7 +82,7 @@ def upload_file():
                 return redirect(request.url)
         file = request.files['file']
 
-        model = request.form['model']
+        model = request.form['radios']
         model_name, pbtxt_name = model_dict[model]
 
         if file.filename == '':
