@@ -10,6 +10,17 @@ A computer vision playground to try and test end to end(test to deploy) computer
 
  **To contribute, create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
 
+**Update 09/2020** : We now have a refreshed look and feel and many changes as listed below and the repository now is `run-safe` or what we call the usual `python script.py` runnable.
+
+  - Updated look and feel using Bootstrap 4.
+    - Check the update look here :
+      - [Homepage/Landing Page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/homepage.png) 
+      - [Selct model and upload file page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/modelselectpage.png)
+      - [Download processed file page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/downloadpage.png)
+  - Fixed model download and model select path workflow.
+  - Better file management.
+  - Some scripts now have logging to help debug the application better.
+  - Also yeah, first fully functional pre-release.
 
 **Update** : A new and easy way to download models is now available in codes/model_downloader.py to easily download and extract multiple models from tensorflow model zoo.
 
