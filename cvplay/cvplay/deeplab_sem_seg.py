@@ -176,7 +176,8 @@ def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABE
     plt.xticks([], [])
     ax.tick_params(width=0.0)
     plt.grid('off')
-    plt.show()
+    # plt.show()
+    plt.savefig('thisissavedimage.png')
 
 
 def preprocess():
