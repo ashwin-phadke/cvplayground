@@ -28,58 +28,45 @@
 
     <body>
         <div class="mt-2 col-md-12">
-            <form method="post" action="/uploads" enctype="multipart/form-data">
+            <form method="post" action="/upload_segmentation_page" enctype="multipart/form-data">
                 <div class="dropdown">
                     <h2>Select the model you want to perform object detection with : </h2>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Select</th>
-                                <th scope="col">Model Name</th>
-                                <th scope="col">Speed(ms)</th>
-                                <th scope="col">COCO mAP[^1]</th>
+                                <th scope="col">Backbone Model Name</th>
+                                <th scope="col">Segmentation Model Name</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <!-- <th scope="row">1</th> -->
-                                <td> <input type="radio" name="radios" value="ssdmv2i" id="radio1" required />
+                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainaug" id="radio1" required />
                                     <label for="radio1"></label></td>
-                                <td>SSD MobileNet v2 COCO</td>
-                                <td>31</td>
-                                <td>22</td>
+                                <td>Mobilenet V2 COCO VOC_TRAIN_AUG</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">2</th> -->
-                                <td> <input type="radio" name="radios" value="ssdiv2" id="radio2" required />
+                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainval" id="radio2" required />
                                     <label for="radio2"></label></td>
-                                <td>SSD Inception v2 COCO</td>
-                                <td>42</td>
-                                <td>24</td>
+                                <td>Mobilenet V2 COCO VOC_TRAIN_VAL</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
-                                <td> <input type="radio" name="radios" value="frcnnv2" id="radio3" required />
+                                <td> <input type="radio" name="radios" value="xception_coco_voctrainaug" id="radio3" required />
                                     <label for="radio3"></label></td>
-                                <td>Faster RCNN Inception v2 COCO</td>
-                                <td>58</td>
-                                <td>28</td>
+                                <td>XCEPTION COCO VOC_TRAIN_AUG</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
-                                <td> <input type="radio" name="radios" value="frcnn50" id="radio4" required />
+                                <td> <input type="radio" name="radios" value="xception_coco_voctrainval" id="radio4" required />
                                     <label for="radio4"></label></td>
-                                <td>Faster RCNN Resnet 50</td>
-                                <td>89</td>
-                                <td>30</td>
-                            </tr>
-                            <tr>
-                                <!-- <th scope="row">3</th> -->
-                                <td> <input type="radio" name="radios" value="mrcnniv2" id="radio5" required />
-                                    <label for="radio5"></label></td>
-                                <td>Mask RCNN Inception v2</td>
-                                <td>79</td>
-                                <td>25</td>
+                                <td>XCEPTION COCO VOC_TRAIN_VAL</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,7 +74,7 @@
                 <p>
                 <div class="mt-2 col-md-12">
                     <h2>Select a file to upload</h2>
-                    <input type="file" name="file" autocomplete="off" required>
+                    <input type="file" name="file" autocomplete="off" accept="image/*" required>
                     </p>
                     <p>
                         <!-- <input type="submit" value="Submit"> -->
