@@ -145,7 +145,7 @@ def label_to_color_image(label):
     return colormap[label]
 
 
-def vis_segmentation(image, seg_map):
+def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES):
     """Visualizes input image, segmentation map and overlay view."""
     plt.figure(figsize=(15, 5))
     grid_spec = gridspec.GridSpec(1, 4, width_ratios=[6, 6, 6, 1])
@@ -217,7 +217,7 @@ def preprocess():
     download_path = os.path.join(model_dir, _TARBALL_NAME)
     print('downloading model, this might take a while...')
     urllib.request.urlretrieve(_DOWNLOAD_URL_PREFIX + _MODEL_URLS[MODEL_NAME],
-                            download_path)
+                               download_path)
     print('download completed! loading DeepLab model...')
 
     MODEL = DeepLabModel(download_path)
@@ -238,13 +238,14 @@ def preprocess():
     IMAGE_URL = ''  # @param {type:"string"}
 
     _SAMPLE_URL = ('https://github.com/tensorflow/models/blob/master/research/'
-                'deeplab/g3doc/img/%s.jpg?raw=true')
+                   'deeplab/g3doc/img/%s.jpg?raw=true')
 
     image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
-    run_visualization(image_url)
+    run_visualization(image_url, MODEL, FULL_COLOR_MAP,
+                      FULL_LABEL_MAP, LABEL_NAMES)
 
 
-def run_visualization(url):
+def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES):
     """Inferences DeepLab model and visualizes result."""
     try:
         f = urllib.request.urlopen(url)
@@ -257,7 +258,9 @@ def run_visualization(url):
     print('running deeplab on image %s...' % url)
     resized_im, seg_map = MODEL.run(original_im)
 
-    vis_segmentation(resized_im, seg_map)
+    vis_segmentation(resized_im, seg_map, MODEL,
+                     FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES)
+
 
 if __name__ == "__main__":
     try:
