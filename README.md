@@ -4,7 +4,11 @@
   <img src="https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/readme_assets/logo.png" alt="Logo from pixabay images"/>
 </p>
 
-[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) 
+[![fork](https://img.shields.io/github/forks/ashwin-phadke/cvplayground)](https://img.shields.io/github/forks/ashwin-phadke/cvplayground)
+[![fork](https://img.shields.io/badge/python-3.6%2B-orange)](https://img.shields.io/badge/python-3.6%2B-orange)
+[![stars](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)
+[![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
