@@ -33,6 +33,7 @@ from matplotlib import gridspec
 from matplotlib import pyplot as plt
 import numpy as np
 from PIL import Image
+import cv2
 
 # %tensorflow_version 1.x
 import tensorflow as tf
@@ -90,6 +91,7 @@ class DeepLabModel(object):
           resized_image: RGB image resized from original input image.
           seg_map: Segmentation map of `resized_image`.
         """
+        image = Image.open(image)
         width, height = image.size
         resize_ratio = 1.0 * self.INPUT_SIZE / max(width, height)
         target_size = (int(resize_ratio * width), int(resize_ratio * height))
@@ -145,8 +147,9 @@ def label_to_color_image(label):
     return colormap[label]
 
 
-def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES):
+def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id):
     """Visualizes input image, segmentation map and overlay view."""
+    IMG_SAVE_PATH = 'static/' + id + '.png'
     plt.figure(figsize=(15, 5))
     grid_spec = gridspec.GridSpec(1, 4, width_ratios=[6, 6, 6, 1])
 
@@ -177,10 +180,11 @@ def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABE
     ax.tick_params(width=0.0)
     plt.grid('off')
     # plt.show()
-    plt.savefig('thisissavedimage.png')
+    plt.savefig(IMG_SAVE_PATH)
+    return IMG_SAVE_PATH
 
 
-def preprocess():
+def preprocess(location, id, model_name):
 
     LABEL_NAMES = np.asarray([
         'background', 'aeroplane', 'bicycle', 'bird', 'boat', 'bottle', 'bus',
@@ -196,19 +200,19 @@ def preprocess():
     """
 
     # @param ['mobilenetv2_coco_voctrainaug', 'mobilenetv2_coco_voctrainval', 'xception_coco_voctrainaug', 'xception_coco_voctrainval']
-    MODEL_NAME = 'mobilenetv2_coco_voctrainaug'
+    # MODEL_NAME = 'mobilenetv2_coco_voctrainaug'
 
     _DOWNLOAD_URL_PREFIX = 'http://download.tensorflow.org/models/'
-    _MODEL_URLS = {
-        'mobilenetv2_coco_voctrainaug':
-            'deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz',
-        'mobilenetv2_coco_voctrainval':
-            'deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz',
-        'xception_coco_voctrainaug':
-            'deeplabv3_pascal_train_aug_2018_01_04.tar.gz',
-        'xception_coco_voctrainval':
-            'deeplabv3_pascal_trainval_2018_01_04.tar.gz',
-    }
+    # _MODEL_URLS = {
+    #     'mobilenetv2_coco_voctrainaug':
+    #         'deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz',
+    #     'mobilenetv2_coco_voctrainval':
+    #         'deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz',
+    #     'xception_coco_voctrainaug':
+    #         'deeplabv3_pascal_train_aug_2018_01_04.tar.gz',
+    #     'xception_coco_voctrainval':
+    #         'deeplabv3_pascal_trainval_2018_01_04.tar.gz',
+    # }
     _TARBALL_NAME = 'deeplab_model.tar.gz'
 
     model_dir = tempfile.mkdtemp()
@@ -217,7 +221,7 @@ def preprocess():
 
     download_path = os.path.join(model_dir, _TARBALL_NAME)
     print('downloading model, this might take a while...')
-    urllib.request.urlretrieve(_DOWNLOAD_URL_PREFIX + _MODEL_URLS[MODEL_NAME],
+    urllib.request.urlretrieve(_DOWNLOAD_URL_PREFIX + model_name,
                                download_path)
     print('download completed! loading DeepLab model...')
 
@@ -235,32 +239,35 @@ def preprocess():
     which uses multi-scale and left-right flipped inputs.
     """
 
-    SAMPLE_IMAGE = 'image1'  # @param ['image1', 'image2', 'image3']
-    IMAGE_URL = ''  # @param {type:"string"}
+    # SAMPLE_IMAGE = 'image1'  # @param ['image1', 'image2', 'image3']
+    # IMAGE_URL = ''  # @param {type:"string"}
 
-    _SAMPLE_URL = ('https://github.com/tensorflow/models/blob/master/research/'
-                   'deeplab/g3doc/img/%s.jpg?raw=true')
+    # _SAMPLE_URL = ('https://github.com/tensorflow/models/blob/master/research/'
+    #                'deeplab/g3doc/img/%s.jpg?raw=true')
 
-    image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
-    run_visualization(image_url, MODEL, FULL_COLOR_MAP,
-                      FULL_LABEL_MAP, LABEL_NAMES)
+    image_url = location
+    #image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
+    img_path = run_visualization(image_url, MODEL, FULL_COLOR_MAP,
+                      FULL_LABEL_MAP, LABEL_NAMES, id)
+    return img_path
 
 
-def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES):
+def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id):
     """Inferences DeepLab model and visualizes result."""
-    try:
-        f = urllib.request.urlopen(url)
-        jpeg_str = f.read()
-        original_im = Image.open(BytesIO(jpeg_str))
-    except IOError:
-        print('Cannot retrieve image. Please check url: ' + url)
-        return
+    # try:
+    #     f = urllib.request.urlopen(url)
+    #     jpeg_str = f.read()
+    #     original_im = Image.open(BytesIO(jpeg_str))
+    # except IOError:
+    #     print('Cannot retrieve image. Please check url: ' + url)
+    #     return
 
     print('running deeplab on image %s...' % url)
-    resized_im, seg_map = MODEL.run(original_im)
+    resized_im, seg_map = MODEL.run(url)
 
-    vis_segmentation(resized_im, seg_map, MODEL,
-                     FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES)
+    img_path = vis_segmentation(resized_im, seg_map, MODEL,
+                     FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id)
+    return img_path
 
 
 if __name__ == "__main__":

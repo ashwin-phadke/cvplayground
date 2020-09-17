@@ -16,6 +16,7 @@ from werkzeug.utils import secure_filename
 
 #from flask_process import process_video
 from cvplay.flask_process import process_video
+from flask_process import process_segment_image
 from cvplay.db_create import main
 
 UPLOAD_FOLDER = 'uploads'
@@ -82,7 +83,7 @@ def show_form():
 def show_segmentation_form():
     return render_template('modelselectsegmentationindex.html')
 
-@app.route('upload_segmentation_page', methods=['POST', 'GET'])
+@app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():
     if request.method == 'POST':
         ip_address = request.remote_addr
@@ -97,8 +98,8 @@ def upload_segmentation_file():
 
 
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            filename_save = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
             print("File saved successfully")
@@ -110,13 +111,14 @@ def upload_segmentation_file():
             isProcessed = False
             location = file_path
             status = 1
+            pbtxt_name = 'SegModel'
             cur.execute("INSERT INTO uploads (id, status, isUploaded, isProcessed, location, datetime, model_name, pbtxt_name) values(?, ?, ?, ?, ?, ?, ?, ?)",
-                        (new_uuid, status, isUploaded, isProcessed, location, dtt, model_name, pbtxt_name))
+                        (new_uuid, status, isUploaded, isProcessed, location, dtt, download_model_name, pbtxt_name))
             conn.commit()
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
-            process_video()
-            filename = new_uuid + '.mp4'
+            img_path  = process_segment_image()
+            filename = img_path + '.png'
             time.sleep(5)
             return redirect('/downloadfile/' + filename)
 
@@ -124,9 +126,6 @@ def upload_segmentation_file():
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
-
-
-
 
 @app.route('/uploads', methods=['POST', 'GET'])
 def upload_file():
