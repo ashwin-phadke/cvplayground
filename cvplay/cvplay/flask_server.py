@@ -96,7 +96,6 @@ def upload_segmentation_file():
         backbone_model_name = request.form['radios']
         download_model_name = _MODEL_URLS[backbone_model_name]
 
-
         if file and allowed_file(file.filename):
             filename_save = secure_filename(file.filename)
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename_save)
@@ -120,7 +119,7 @@ def upload_segmentation_file():
             img_path  = process_segment_image()
             filename = img_path + '.png'
             time.sleep(5)
-            return redirect('/downloadfile/' + filename)
+            return redirect('/downloadsegmentationfile/' + filename)
 
         else:
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
@@ -175,6 +174,16 @@ def upload_file():
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
+
+@app.route("/downloadsegmentationfile/<filename>", methods=['GET'])
+def download_segfile(filename):
+    return render_template('downloadsegmentindex.html', value=filename)
+
+
+@app.route('/return-seg-files/<filename>')
+def return_segfiles_tut(filename):
+    file_path = DOWNLOAD_FOLDER + filename
+    return send_file(file_path,  as_attachment=True)
 
 
 @app.route("/downloadfile/<filename>", methods=['GET'])
