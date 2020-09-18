@@ -9,6 +9,7 @@
 [![fork](https://img.shields.io/badge/python-3.6%2B-orange)](https://img.shields.io/badge/python-3.6%2B-orange)
 [![stars](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)
 [![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
+[![pypi](https://img.shields.io/badge/pypi-0.4.1-success)](https://img.shields.io/badge/pypi-0.4.1-success)
 
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
@@ -24,6 +25,11 @@ A computer vision playground to try and test end to end(test to deploy) computer
 
 - Languages, Tools, Frameworks : 
   - TensorFlow, Python, Flask, HTML+CSS+JS, SQLite database.
+
+- Screenshots :
+  - [Homepage/Landing Page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/homepage.png) 
+  - [Selct model and upload file page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/modelselectpage.png)
+  - [Download processed file page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/downloadpage.png)
 
 ### Installation via Pip:
 - Almost all of your work is already done.

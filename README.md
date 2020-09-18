@@ -9,7 +9,7 @@
 [![fork](https://img.shields.io/badge/python-3.6%2B-orange)](https://img.shields.io/badge/python-3.6%2B-orange)
 [![stars](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)](https://img.shields.io/github/stars/ashwin-phadke/cvplayground)
 [![Open Source Love png2](https://badges.frapsoft.com/os/v2/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
-
+[![pypi](https://img.shields.io/badge/pypi-0.4.1-success)](https://img.shields.io/badge/pypi-0.4.1-success)
 A computer vision playground to try and test end to end(test to deploy) computer vision pipeline. 
 
  **To contribute, create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
