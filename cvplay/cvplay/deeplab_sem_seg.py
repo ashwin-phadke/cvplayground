@@ -24,21 +24,19 @@ The models used in this colab perform semantic segmentation. Semantic segmentati
 
 # Commented out IPython magic to ensure Python compatibility.
 import os
-from io import BytesIO
 import tarfile
 import tempfile
-from six.moves import urllib
+from io import BytesIO
 
-from matplotlib import gridspec
-from matplotlib import pyplot as plt
-import numpy as np
-from PIL import Image
 import cv2
-
-# %tensorflow_version 1.x
+import numpy as np
 import tensorflow as tf
 import tensorflow.compat.v1 as tf1
-print(tf.__version__)
+from matplotlib import gridspec
+from matplotlib import pyplot as plt
+from PIL import Image
+from six.moves import urllib
+
 
 """## Import helper methods
 These methods help us perform the following tasks:
@@ -248,7 +246,7 @@ def preprocess(location, id, model_name):
     image_url = location
     #image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
     img_path = run_visualization(image_url, MODEL, FULL_COLOR_MAP,
-                      FULL_LABEL_MAP, LABEL_NAMES, id)
+                                 FULL_LABEL_MAP, LABEL_NAMES, id)
     return img_path
 
 
@@ -266,7 +264,7 @@ def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, i
     resized_im, seg_map = MODEL.run(url)
 
     img_path = vis_segmentation(resized_im, seg_map, MODEL,
-                     FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id)
+                                FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id)
     return img_path
 
 
