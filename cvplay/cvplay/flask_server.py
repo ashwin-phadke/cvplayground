@@ -1,5 +1,5 @@
-import json
 import datetime
+import json
 import logging
 import os
 import sqlite3
@@ -9,15 +9,15 @@ import urllib.request
 import uuid
 from pathlib import Path
 
+from cvplay.db_create import main
+#from flask_process import process_video
+from cvplay.flask_process import process_video
 #from webapp import app
 from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-#from flask_process import process_video
-from cvplay.flask_process import process_video
 from flask_process import process_segment_image
-from cvplay.db_create import main
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -50,13 +50,20 @@ _MODEL_URLS = {
         'deeplabv3_pascal_trainval_2018_01_04.tar.gz',
 }
 
+
 def generate_uuid():
+    """
+    Generating Unique ID's for storing files in database, this is done in order to overcome file name issues and have a standard filename.
+    """
     new_id = uuid.uuid4()
     logging.info('UUID created')
     return new_id
 
 
 def date_time():
+    """
+    Storing local timestamp for logging purposes.
+    """
     time_string = time.strftime("%m/%d/%Y, %H:%M:%S",)
     return time_string
 
@@ -67,6 +74,9 @@ def allowed_file(filename):
 
 @app.route('/')
 def upload_form():
+    """
+    Retunrs the homepage for the app located in templates folder.
+    """
     return render_template('bootstrapindex.html')
 
 # @app.route('/index', methods=['GET', 'POST'])
@@ -77,28 +87,50 @@ def upload_form():
 
 @app.route('/upload_page', methods=['GET', 'POST'])
 def show_form():
+    """
+    Returns Model selection page where choice of different models is given to the user. These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
+    """
     return render_template('modelselectindex.html')
+
 
 @app.route('/segmentation_upload_page', methods=['GET', 'POST'])
 def show_segmentation_form():
+    """
+    Returns the template to upload image and choose model to perform semantic segmentation using Deeplab v3.
+    """
     return render_template('modelselectsegmentationindex.html')
+
 
 @app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():
+    """
+    Function to process the uploaded image for semantic segmentation over deeplab v3.
+    """
+
+    # Check if the method was a POST request
     if request.method == 'POST':
         ip_address = request.remote_addr
+
+        # Connect  to the database
         conn = sqlite3.connect('db/cvplayground.sqlite')
         logging.info('User %s entered app', ip_address)
         if 'file' not in request.files:
             if 'model' not in request.form:
                 return redirect(request.url)
+
+        # Get the uploaded file.
         file = request.files['file']
+
+        # Get the name of the backbone network chosen by the user which is also a key from the _MODEL_URLS dictionary.
         backbone_model_name = request.form['radios']
+
+        # Get the relevant pre trained model using the above key.
         download_model_name = _MODEL_URLS[backbone_model_name]
 
         if file and allowed_file(file.filename):
             filename_save = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename_save)
+            file_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
             print("File saved successfully")
@@ -116,15 +148,20 @@ def upload_segmentation_file():
             conn.commit()
             conn.close()
             logging.info('File saved successfully from %s user', ip_address)
-            img_path  = process_segment_image()
+
+            # Implement deeplab semantic segmentation over image through this call.
+            img_path = process_segment_image()
             filename = img_path + '.png'
             time.sleep(5)
+
+            # Return processed image
             return redirect('/downloadsegmentationfile/' + filename)
 
         else:
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
+
 
 @app.route('/uploads', methods=['POST', 'GET'])
 def upload_file():
@@ -174,6 +211,7 @@ def upload_file():
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
+
 
 @app.route("/downloadsegmentationfile/<filename>", methods=['GET'])
 def download_segfile(filename):
