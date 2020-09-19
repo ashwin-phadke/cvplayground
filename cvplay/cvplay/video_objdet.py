@@ -1,39 +1,50 @@
 # import the necessary packages
 import argparse
+import logging
 import os
 import sys
 import tarfile
 import time
+import urllib
 import zipfile
 from collections import defaultdict
 from io import StringIO
+from os import chdir
+from pathlib import Path
 
 import cv2
 import imutils
 import numpy as np
 import six.moves.urllib as urllib
 import tensorflow as tf
-from imutils.video import FPS, VideoStream
-from matplotlib import pyplot as plt
-from PIL import Image
-
+import wget
 from cvplay.codes.models.research.object_detection.utils import label_map_util
 from cvplay.codes.models.research.object_detection.utils import \
     visualization_utils as vis_util
 # from cvplay.model_downloader import download_model
 #from cvplay import model_downloader
 from cvplay.model_downloader import download_model
-sys.path.append("..")
-# Do necessary imports
+from imutils.video import FPS, VideoStream
+from matplotlib import pyplot as plt
+from PIL import Image
 
-import tarfile
-import urllib
-from os import chdir
-from pathlib import Path
-import wget
-import logging
-# Object detection function 
+sys.path.append("..")
+
+
+# Object detection function
+
 def objdetectionfunc(urlll, id, model_name, pbtxt_name):
+    """
+    Implements the function to proess videos for object detection.
+    Function :
+        objdetectionfunc()
+    Arguments :
+        location = file store location
+        id : uuid of the file
+        model name : chosen model name
+        pbtxt_name : pbtxt file of the chosen model.
+        Confidence : minimum probability to filter weak detections
+    """
 
     # construct the argument parse and parse the arguments
     ap = argparse.ArgumentParser()
@@ -41,16 +52,17 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                     help="minimum probability to filter weak detections")
     args = vars(ap.parse_args())
 
-    #define save paths and path to models and it's pbtxt files
+    # define save paths and path to models and it's pbtxt files
     VID_SAVE_PATH = 'static/'
     BASE_PATH = 'detect_models/'
     INFERENCE = 'frozen_inference_graph.pb'
 
-    PATH_TO_CKPT = os.path.join(BASE_PATH, model_name + '/', model_name, INFERENCE)
-    #PATH_TO_PBTXT = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
+    PATH_TO_CKPT = os.path.join(
+        BASE_PATH, model_name + '/', model_name, INFERENCE)
     if not os.path.exists(PATH_TO_CKPT):
         path_to_model, path_to_pbtxt = download_model(model_name, pbtxt_name)
-    print(path_to_model, path_to_pbtxt)
+
+    # Define the COCO classes set.
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                   "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
