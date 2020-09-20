@@ -100,6 +100,80 @@ def show_segmentation_form():
     """
     return render_template('modelselectsegmentationindex.html')
 
+@app.route('/pose_estimation_upload_page', methods=['GET', 'POST'])
+def show_pose_estimation_form():
+    """
+    Returns the template to upload image and choose model to perform Pose Estimation.
+    """
+    return render_template('modelselectposeestimation.html')
+
+
+
+@app.route('/upload_pose_estimation_page', methods=['POST', 'GET'])
+def upload_segmentation_file():
+    """
+    Function to process the uploaded video for Pose Estimation.
+    """
+
+    # Check if the method was a POST request
+    if request.method == 'POST':
+        ip_address = request.remote_addr
+
+        # Connect  to the database
+        conn = sqlite3.connect('db/cvplayground.sqlite')
+        logging.info('User %s entered app', ip_address)
+        if 'file' not in request.files:
+            if 'model' not in request.form:
+                return redirect(request.url)
+
+        # Get the uploaded file.
+        file = request.files['file']
+
+        # Get the name of the backbone network chosen by the user.
+        backbone_model_name = request.form['radios']
+
+        # Get the relevant pre trained model using the above key.
+        # download_model_name = _MODEL_URLS[backbone_model_name]
+
+        if file and allowed_file(file.filename):
+            filename_save = secure_filename(file.filename)
+            file_path = os.path.join(
+                app.config['UPLOAD_FOLDER'], filename_save)
+            file.save(file_path)
+            logging.info('User %s successfully saved file', ip_address)
+            print("File saved successfully")
+            cur = conn.cursor()
+            new_uuid = str(generate_uuid())
+
+            dtt = date_time()
+            isUploaded = True
+            isProcessed = False
+            location = file_path
+            status = 1
+            pbtxt_name = 'SegModel'
+            cur.execute("INSERT INTO uploads (id, status, isUploaded, isProcessed, location, datetime, model_name, pbtxt_name) values(?, ?, ?, ?, ?, ?, ?, ?)",
+                        (new_uuid, status, isUploaded, isProcessed, location, dtt, backbone_model_name, pbtxt_name))
+            conn.commit()
+            conn.close()
+            logging.info('File saved successfully from %s user', ip_address)
+
+            # Implement deeplab semantic segmentation over image through this call.
+            img_path = process_segment_image()
+            filename = img_path + '.png'
+            time.sleep(5)
+
+            # Return processed image
+            return redirect('/downloadsegmentationfile/' + filename)
+
+        else:
+            flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+            logging.info('User %s did not save a video file', ip_address)
+            return redirect(request.url)
+
+
+
+
+
 
 @app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():

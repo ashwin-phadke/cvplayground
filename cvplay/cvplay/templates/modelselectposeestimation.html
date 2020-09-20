@@ -30,43 +30,56 @@
         <div class="mt-2 col-md-12">
             <form method="post" action="/upload_segmentation_page" enctype="multipart/form-data">
                 <div class="dropdown">
-                    <h2>Select the model you want to perform semantic segmentation with : </h2>
+                    <h2>Select the model you want to perform pose estimation with : </h2>
                     <table class="table">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Select</th>
-                                <th scope="col">Backbone Model Name</th>
-                                <th scope="col">Segmentation Model Name</th>
+                                <th scope="col">Pose Estimation Model Name</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <!-- <th scope="row">1</th> -->
-                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainaug" id="radio1" required />
+                                <td> <input type="radio" name="radios" value="cmu" id="radio1" required />
                                     <label for="radio1"></label></td>
-                                <td>Mobilenet V2 COCO VOC_TRAIN_AUG</td>
-                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
+                                <td>CMU</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">2</th> -->
-                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainval" id="radio2" required />
+                                <td> <input type="radio" name="radios" value="openpose_quantize" id="radio2" required />
                                     <label for="radio2"></label></td>
-                                <td>Mobilenet V2 COCO VOC_TRAIN_VAL</td>
-                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
+                                <td>OpenPose Quantize</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
-                                <td> <input type="radio" name="radios" value="xception_coco_voctrainaug" id="radio3" required />
+                                <td> <input type="radio" name="radios" value="mobilenet_thin" id="radio3" required />
                                     <label for="radio3"></label></td>
-                                <td>XCEPTION COCO VOC_TRAIN_AUG</td>
-                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
+                                <td>MobileNet Thin</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
-                                <td> <input type="radio" name="radios" value="xception_coco_voctrainval" id="radio4" required />
+                                <td> <input type="radio" name="radios" value="mobilenet_v2_large" id="radio4" required />
                                     <label for="radio4"></label></td>
-                                <td>XCEPTION COCO VOC_TRAIN_VAL</td>
-                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
+                                <td>MobileNet v2 Large</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">3</th> -->
+                                <td> <input type="radio" name="radios" value="mobilenet_v2_large_r0.5" id="radio4" required />
+                                    <label for="radio4"></label></td>
+                                <td>MobileNet v2 Large R0.5</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">3</th> -->
+                                <td> <input type="radio" name="radios" value="mobilenet_v2_large_quantize" id="radio4" required />
+                                    <label for="radio4"></label></td>
+                                <td>MobileNet v2 Large Quantize</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">3</th> -->
+                                <td> <input type="radio" name="radios" value="mobilenet_v2_small" id="radio4" required />
+                                    <label for="radio4"></label></td>
+                                <td>MobileNet v2 Small</td>
                             </tr>
                         </tbody>
                     </table>
