@@ -28,7 +28,7 @@
 
     <body>
         <div class="mt-2 col-md-12">
-            <form method="post" action="/upload_segmentation_page" enctype="multipart/form-data">
+            <form method="post" action="/upload_pose_estimation_page" enctype="multipart/form-data">
                 <div class="dropdown">
                     <h2>Select the model you want to perform pose estimation with : </h2>
                     <table class="table">
@@ -36,6 +36,7 @@
                             <tr>
                                 <th scope="col">Select</th>
                                 <th scope="col">Pose Estimation Model Name</th>
+                                <th scope="col">Model availability</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,12 +57,14 @@
                                 <td> <input type="radio" name="radios" value="mobilenet_thin" id="radio3" required />
                                     <label for="radio3"></label></td>
                                 <td>MobileNet Thin</td>
+                                <td>Available</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
                                 <td> <input type="radio" name="radios" value="mobilenet_v2_large" id="radio4" required />
                                     <label for="radio4"></label></td>
                                 <td>MobileNet v2 Large</td>
+                                <td>Available</td>
                             </tr>
                             <tr>
                                 <!-- <th scope="row">3</th> -->
@@ -87,7 +90,7 @@
                 <p>
                 <div class="mt-2 col-md-12">
                     <h2>Select a file to upload</h2>
-                    <input type="file" name="file" autocomplete="off" accept="image/*" required>
+                    <input type="file" name="file" autocomplete="off" accept="video/*" required>
                     </p>
                     <p>
                         <!-- <input type="submit" value="Submit"> -->

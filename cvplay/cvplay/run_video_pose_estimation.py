@@ -28,7 +28,7 @@ def estimate_pose(id, video, model):
                         fourcc, 20.0, (640, 480))
 
     parser = argparse.ArgumentParser(description='tf-pose-estimation Video')
-    parser.add_argument('--video', type=str, default='')
+    #parser.add_argument('--video', type=str, default='')
     parser.add_argument('--resolution', type=str, default='432x368', help='network input resolution. default=432x368')
     parser.add_argument('--model', type=str, default='mobilenet_thin', help='cmu / mobilenet_thin / mobilenet_v2_large / mobilenet_v2_small')
     # parser.add_argument('--show-process', type=bool, default=False,
@@ -39,23 +39,25 @@ def estimate_pose(id, video, model):
     logger.debug('initialization %s : %s' % (args.model, get_graph_path(args.model)))
     w, h = model_wh(args.resolution)
     e = TfPoseEstimator(get_graph_path(args.model), target_size=(300,300))
-    cap = cv2.VideoCapture(args.video)
+    cap = cv2.VideoCapture(video)
 
     if cap.isOpened() is False:
         print("Error opening video stream or file")
     while cap.isOpened():
         ret_val, image = cap.read()
+        if not ret_val:
+            break
 
         humans = e.inference(image)
         if not args.showBG:
             image = np.zeros(image.shape)
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
-
+        fps_time = time.time()
         cv2.putText(image, "FPS: %f" % (1.0 / (time.time() - fps_time)), (10, 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
         resized = cv2.resize(image, (640,480))
         out.write(resized)
         cv2.imshow('tf-pose-estimation result', resized)
-        fps_time = time.time()
+
         if cv2.waitKey(1) == 27:
             break
     cap.release()
@@ -66,5 +68,5 @@ logger.debug('finished+')
 
 
 
-if __name__ == '__main__':
-    pass()
+# if __name__ == '__main__':
+#     pass()

@@ -18,6 +18,7 @@ from flask import (Flask, flash, make_response, redirect, render_template,
 from werkzeug.utils import secure_filename
 
 from flask_process import process_segment_image
+from flask_process import process_pose_estimation
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -110,7 +111,7 @@ def show_pose_estimation_form():
 
 
 @app.route('/upload_pose_estimation_page', methods=['POST', 'GET'])
-def upload_segmentation_file():
+def upload_pose_estimation_file():
     """
     Function to process the uploaded video for Pose Estimation.
     """
@@ -158,8 +159,8 @@ def upload_segmentation_file():
             logging.info('File saved successfully from %s user', ip_address)
 
             # Implement deeplab semantic segmentation over image through this call.
-            img_path = process_segment_image()
-            filename = img_path + '.png'
+            img_path = process_pose_estimation()
+            filename = img_path + '.mp4'
             time.sleep(5)
 
             # Return processed image
