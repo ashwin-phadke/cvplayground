@@ -14,7 +14,9 @@
 
   <!-- Bootstrap core CSS -->
   <!-- <link href="bootstrap.min.css" rel="stylesheet"> -->
+  <link href="{{url_for('static', filename = 'css/bootstrap.css')}}" rel="stylesheet">
   <link href="{{url_for('static', filename = 'css/bootstrap.min.css')}}" rel="stylesheet">
+
 
   <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
   <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -54,7 +56,7 @@
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
               <li class="active"><a href="#">Home</a></li>
-              <li><a href="">FAQ</a></li>
+              <li><a href="{{url_for('static', filename = 'faq.html')}}">FAQ</a></li>
               <li><a href="https://github.com/ashwin-phadke/cvplayground">Github</a></li>
               <!-- <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -103,10 +105,10 @@
       </div>
       <div class="item">
         <img class="second-slide"
-          src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+        src="{{url_for('static', filename = 'images/segmentimage.jpeg')}}" alt="Second slide">
         <div class="container">
           <div class="carousel-caption">
-            <h1>Another example headline.</h1>
+            <h1>Segmentation</h1>
             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget
               metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
             <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
@@ -174,7 +176,7 @@
             alt="Generic placeholder image" width="200" height="200">
           <h2>Pose Estimation</h2>
           <p>Try pose Estimation models on your data and check out some amazing results. Pose Estimation is used in multiple applciations ranging from domains like healthcare, fitness to security</p>
-          <p><a href="{{ url_for('show_pose_estimation_form')}}" class="btn btn-warning btn-lg warning" role="button">In Progress</a>
+          <p><a href="{{ url_for('show_pose_estimation_form')}}" class="btn btn-success btn-lg warning" role="button">Start App</a>
         </div><!-- /.col-lg-4 -->
       </div>
     </div><!-- /.row -->
