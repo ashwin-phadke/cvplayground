@@ -13,12 +13,6 @@ This colab demonstrates the steps to use the DeepLab model to perform semantic s
 ### About DeepLab
 The models used in this colab perform semantic segmentation. Semantic segmentation models focus on assigning semantic labels, such as sky, person, or car, to multiple objects and stuff in a single image.
 
-# Instructions
-<h3><a href="https://cloud.google.com/tpu/"><img valign="middle" src="https://raw.githubusercontent.com/GoogleCloudPlatform/tensorflow-without-a-phd/master/tensorflow-rl-pong/images/tpu-hexagon.png" width="50"></a>  &nbsp;&nbsp;Use a free TPU device</h3>
-
-   1. On the main menu, click Runtime and select **Change runtime type**. Set "TPU" as the hardware accelerator.
-   1. Click Runtime again and select **Runtime > Run All**. You can also run the cells manually with Shift-ENTER.
-
 ## Import Libraries
 """
 
@@ -65,7 +59,6 @@ class DeepLabModel(object):
         for tar_info in tar_file.getmembers():
             if self.FROZEN_GRAPH_NAME in os.path.basename(tar_info.name):
                 file_handle = tar_file.extractfile(tar_info)
-                #graph_def = tf.GraphDef.FromString(file_handle.read())
                 graph_def = tf1.GraphDef.FromString(file_handle.read())
                 break
 
@@ -177,7 +170,6 @@ def vis_segmentation(image, seg_map, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABE
     plt.xticks([], [])
     ax.tick_params(width=0.0)
     plt.grid('off')
-    # plt.show()
     plt.savefig(IMG_SAVE_PATH)
     return IMG_SAVE_PATH
 
@@ -201,21 +193,10 @@ def preprocess(location, id, model_name):
     # MODEL_NAME = 'mobilenetv2_coco_voctrainaug'
 
     _DOWNLOAD_URL_PREFIX = 'http://download.tensorflow.org/models/'
-    # _MODEL_URLS = {
-    #     'mobilenetv2_coco_voctrainaug':
-    #         'deeplabv3_mnv2_pascal_train_aug_2018_01_29.tar.gz',
-    #     'mobilenetv2_coco_voctrainval':
-    #         'deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz',
-    #     'xception_coco_voctrainaug':
-    #         'deeplabv3_pascal_train_aug_2018_01_04.tar.gz',
-    #     'xception_coco_voctrainval':
-    #         'deeplabv3_pascal_trainval_2018_01_04.tar.gz',
-    # }
     _TARBALL_NAME = 'deeplab_model.tar.gz'
 
     model_dir = tempfile.mkdtemp()
     tf.io.gfile.makedirs(model_dir)
-    # tf.gfile.MakeDirs(model_dir)
 
     download_path = os.path.join(model_dir, _TARBALL_NAME)
     print('downloading model, this might take a while...')

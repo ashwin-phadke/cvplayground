@@ -10,4 +10,9 @@ Flask==1.1.2
 werkzeug==1.0.1
 pytest-custom-exit-code==0.3.0
 imutils==0.5.3
+wget==3.2
+tqdm==4.49.0
+slidingwindow==0.0.14
+tf_slim==1.1.0
+pycocotools==2.0.2
 

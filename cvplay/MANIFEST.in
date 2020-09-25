@@ -6,3 +6,9 @@ recursive-include cvplay/static *.html
 recursive-include cvplay/static *.png
 recursive-include cvplay/ *.py
 recursive-include cvplay/db *.sqlite
+recursive-include cvplay/ *.cpp
+recursive-include cvplay/ *.h
+recursive-include cvplay/ *.cxx
+recursive-include cvplay/ *.i
+recursive-include cvplay/ *.so
+recursive-include cvplay/static *
