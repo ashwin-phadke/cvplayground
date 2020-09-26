@@ -80,6 +80,8 @@ OR simply go to `codes/db_create.py` and let it do all the work for you.
     or
 
     ```gunicorn -t 1000 flask_server:app```
+
+    - Run using Gunicorn now : `gunicorn -t 1000 --log-level=debug flask_server:app`
     
     (compatible with Heroku too) to deploy on production using Gunicorn
 

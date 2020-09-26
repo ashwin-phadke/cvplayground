@@ -15,7 +15,7 @@ A computer vision playground to try and test end to end(test to deploy) computer
  **To contribute, create an issue and refer [Contributing](https://github.com/ashwin-phadke/cvplayground/blob/master/CONTRIBUTING.md) for possible options.**
 
 **Update 09/2020** : We now have a refreshed look and feel and many changes as listed below and the repository now is `run-safe` or what we call the usual `python script.py` runnable.
-
+  - Run using Gunicorn now : `gunicorn -t 1000 --log-level=debug flask_server:app`
   - Updated look and feel using Bootstrap 4.
     - Check the update look here :
       - [Homepage/Landing Page](https://raw.githubusercontent.com/ashwin-phadke/cvplayground/master/cvplay/cvplay/readme_assets/homepage.png) 

@@ -9,7 +9,7 @@ import urllib.request
 import uuid
 from pathlib import Path
 
-from cvplay.db_create import main
+from cvplay.db_create import main as db
 #from flask_process import process_video
 from cvplay.flask_process import process_video
 #from webapp import app
@@ -28,9 +28,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 # app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
-logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+# logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
+#                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
+if __name__ != '__main__':
+    gunicorn_logger = logging.getLogger('gunicorn.error')
+    app.logger.handlers = gunicorn_logger.handlers
+    app.logger.setLevel(gunicorn_logger.level)
 
 app.secret_key = "secret key"
 
@@ -59,6 +63,18 @@ def generate_uuid():
     new_id = uuid.uuid4()
     logging.info('UUID created')
     return new_id
+
+
+def check_db_exists():
+    """
+    Checks to see if the dataase file required for the app to function exists in the current directory and if not then creates it with all the required tables.
+    """
+    if not os.path.isfile('db/cvplayground.db'):
+        print('Creating database, this might take a while')
+        db()
+        print('Database created. Starting the app now')
+    else:
+        print('Database already exists. Starting app now...')
 
 
 def date_time():
@@ -101,13 +117,13 @@ def show_segmentation_form():
     """
     return render_template('modelselectsegmentationindex.html')
 
+
 @app.route('/pose_estimation_upload_page', methods=['GET', 'POST'])
 def show_pose_estimation_form():
     """
     Returns the template to upload image and choose model to perform Pose Estimation.
     """
     return render_template('modelselectposeestimation.html')
-
 
 
 @app.route('/upload_pose_estimation_page', methods=['POST', 'GET'])
@@ -119,7 +135,8 @@ def upload_pose_estimation_file():
     # Check if the method was a POST request
     if request.method == 'POST':
         ip_address = request.remote_addr
-
+        app.logger.info('User %s entered app ', ip_address)
+        
         # Connect  to the database
         conn = sqlite3.connect('db/cvplayground.sqlite')
         logging.info('User %s entered app', ip_address)
@@ -168,6 +185,7 @@ def upload_pose_estimation_file():
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
 
+
 @app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():
     """
@@ -177,7 +195,7 @@ def upload_segmentation_file():
     # Check if the method was a POST request
     if request.method == 'POST':
         ip_address = request.remote_addr
-
+        app.logger.info('User %s entered app ', ip_address)
         # Connect  to the database
         conn = sqlite3.connect('db/cvplayground.sqlite')
         logging.info('User %s entered app', ip_address)
@@ -234,6 +252,7 @@ def upload_segmentation_file():
 def upload_file():
     if request.method == 'POST':
         ip_address = request.remote_addr
+        app.logger.info('User %s entered app ', ip_address)
         conn = sqlite3.connect('db/cvplayground.sqlite')
         logging.info('User %s entered app', ip_address)
     # check if the post request has the file part
@@ -301,5 +320,7 @@ def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
 
+
 if __name__ == "__main__":
+    check_db_exists()
     app.run(debug=True)
