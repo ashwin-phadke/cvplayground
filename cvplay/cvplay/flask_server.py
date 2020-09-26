@@ -133,9 +133,6 @@ def upload_pose_estimation_file():
         # Get the name of the backbone network chosen by the user.
         backbone_model_name = request.form['radios']
 
-        # Get the relevant pre trained model using the above key.
-        # download_model_name = _MODEL_URLS[backbone_model_name]
-
         if file and allowed_file(file.filename):
             filename_save = secure_filename(file.filename)
             file_path = os.path.join(
@@ -170,11 +167,6 @@ def upload_pose_estimation_file():
             flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
-
-
-
-
-
 
 @app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():
@@ -309,10 +301,5 @@ def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path,  as_attachment=True)
 
-
-def package_main():
-    app.run(debug=True)
-
-
 if __name__ == "__main__":
-    package_main()
+    app.run(debug=True)
