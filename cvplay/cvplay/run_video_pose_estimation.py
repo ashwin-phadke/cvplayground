@@ -28,16 +28,14 @@ def estimate_pose(id, video, model):
                         fourcc, 20.0, (640, 480))
 
     parser = argparse.ArgumentParser(description='tf-pose-estimation Video')
-    #parser.add_argument('--video', type=str, default='')
-    parser.add_argument('--resolution', type=str, default='432x368', help='network input resolution. default=432x368')
-    parser.add_argument('--model', type=str, default='mobilenet_thin', help='cmu / mobilenet_thin / mobilenet_v2_large / mobilenet_v2_small')
-    # parser.add_argument('--show-process', type=bool, default=False,
-    #                     help='for debug purpose, if enabled, speed for inference is dropped.')
     parser.add_argument('--showBG', type=bool, default=True, help='False to show skeleton only.')
     args = parser.parse_args()
 
-    logger.debug('initialization %s : %s' % (args.model, get_graph_path(args.model)))
-    w, h = model_wh(args.resolution)
+    # logger.debug('initialization %s : %s' % (args.model, get_graph_path(args.model)))
+
+    # Default resolution 432x368, to use this simply replace target with w,h where : 
+    # w, h = model_wh(args.resolution)
+    
     e = TfPoseEstimator(get_graph_path(args.model), target_size=(300,300))
     cap = cv2.VideoCapture(video)
 
@@ -64,9 +62,6 @@ def estimate_pose(id, video, model):
     out.release()
     cv2.destroyAllWindows()
 logger.debug('finished+')
-
-
-
 
 # if __name__ == '__main__':
 #     pass()
