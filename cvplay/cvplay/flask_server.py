@@ -9,16 +9,15 @@ import urllib.request
 import uuid
 from pathlib import Path
 
-from cvplay.db_create import main as db
-#from flask_process import process_video
-from cvplay.flask_process import process_video
 #from webapp import app
 from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-from flask_process import process_segment_image
-from flask_process import process_pose_estimation
+#from flask_process import process_video
+from cvplay.flask_process import process_video
+from db_create import main as db
+from flask_process import process_pose_estimation, process_segment_image
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -26,10 +25,6 @@ DOWNLOAD_FOLDER = 'static/'
 app = Flask(__name__, static_folder=DOWNLOAD_FOLDER)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
-# app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-# logging.basicConfig(filename='cvplayground.log', level=logging.DEBUG,
-#                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
 
 if __name__ != '__main__':
     gunicorn_logger = logging.getLogger('gunicorn.error')
@@ -136,7 +131,7 @@ def upload_pose_estimation_file():
     if request.method == 'POST':
         ip_address = request.remote_addr
         app.logger.info('User %s entered app ', ip_address)
-        
+
         # Connect  to the database
         conn = sqlite3.connect('db/cvplayground.sqlite')
         logging.info('User %s entered app', ip_address)

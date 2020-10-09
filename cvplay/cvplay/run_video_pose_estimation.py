@@ -12,7 +12,8 @@ logger = logging.getLogger('TfPoseEstimator-Video')
 logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
 ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter('[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s')
+formatter = logging.Formatter(
+    '[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s')
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
@@ -25,18 +26,19 @@ def estimate_pose(id, video, model):
     BASE_PATH = 'models/'
     fourcc = cv2.VideoWriter_fourcc(*'MP4V')
     out = cv2.VideoWriter(VID_SAVE_PATH + id + '.mp4',
-                        fourcc, 20.0, (640, 480))
+                          fourcc, 20.0, (640, 480))
 
     parser = argparse.ArgumentParser(description='tf-pose-estimation Video')
-    parser.add_argument('--showBG', type=bool, default=True, help='False to show skeleton only.')
+    parser.add_argument('--showBG', type=bool, default=True,
+                        help='False to show skeleton only.')
     args = parser.parse_args()
 
     # logger.debug('initialization %s : %s' % (args.model, get_graph_path(args.model)))
 
-    # Default resolution 432x368, to use this simply replace target with w,h where : 
+    # Default resolution 432x368, to use this simply replace target with w,h where :
     # w, h = model_wh(args.resolution)
-    
-    e = TfPoseEstimator(get_graph_path(args.model), target_size=(300,300))
+
+    e = TfPoseEstimator(get_graph_path(model), target_size=(300, 300))
     cap = cv2.VideoCapture(video)
 
     if cap.isOpened() is False:
@@ -51,8 +53,9 @@ def estimate_pose(id, video, model):
             image = np.zeros(image.shape)
         image = TfPoseEstimator.draw_humans(image, humans, imgcopy=False)
         fps_time = time.time()
-        cv2.putText(image, "FPS: %f" % (1.0 / (time.time() - fps_time)), (10, 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-        resized = cv2.resize(image, (640,480))
+        cv2.putText(image, "FPS: %f" % (1.0 / (time.time() - fps_time)),
+                    (10, 10),  cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+        resized = cv2.resize(image, (640, 480))
         out.write(resized)
         cv2.imshow('tf-pose-estimation result', resized)
 
@@ -61,6 +64,8 @@ def estimate_pose(id, video, model):
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+
+
 logger.debug('finished+')
 
 # if __name__ == '__main__':
