@@ -1,14 +1,10 @@
 # Do necessary imports
+import logging
 import os
 import tarfile
 import urllib
-from urllib import request
 from os import chdir
 from pathlib import Path
-
-import tensorflow as tf
-import logging
-
 
 logger = logging.getLogger('model_downloader logging')
 logger.setLevel(logging.DEBUG)
