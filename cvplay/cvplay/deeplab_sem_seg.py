@@ -20,9 +20,7 @@ The models used in this colab perform semantic segmentation. Semantic segmentati
 import os
 import tarfile
 import tempfile
-from io import BytesIO
 
-import cv2
 import numpy as np
 import tensorflow as tf
 import tensorflow.compat.v1 as tf1
@@ -30,7 +28,6 @@ from matplotlib import gridspec
 from matplotlib import pyplot as plt
 from PIL import Image
 from six.moves import urllib
-
 
 """## Import helper methods
 These methods help us perform the following tasks:

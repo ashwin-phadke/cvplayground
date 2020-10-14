@@ -1,7 +1,4 @@
-import os
 import sqlite3
-import uuid
-from pathlib import Path
 
 from video_objdet import objdetectionfunc
 
@@ -30,6 +27,7 @@ def process_pose_estimation():
     conn.commit()
     conn.close()
     return id
+
 
 def process_segment_image():
     conn = sqlite3.connect(

@@ -1,22 +1,17 @@
-import datetime
-import json
 import logging
 import os
 import sqlite3
-import subprocess
 import time
-import urllib.request
 import uuid
-from pathlib import Path
 
 #from webapp import app
 from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-from flask_process import process_video
 from db_create import main as db
-from flask_process import process_pose_estimation, process_segment_image
+from flask_process import (process_pose_estimation, process_segment_image,
+                           process_video)
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -312,7 +307,7 @@ def download_file(filename):
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
     file_path = DOWNLOAD_FOLDER + filename
-    return send_file(file_path,  as_attachment=True)
+    return send_file(file_path, as_attachment=True)
 
 
 if __name__ == "__main__":

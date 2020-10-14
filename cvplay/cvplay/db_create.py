@@ -33,6 +33,9 @@ def create_table(conn, create_table_sql):
 
 
 def main():
+    """
+    Execute the database creation flow
+    """
     if not os.path.exists('db'):
         os.mkdir('db')
     database = 'db/cvplayground.db'

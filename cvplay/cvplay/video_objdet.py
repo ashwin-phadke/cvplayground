@@ -1,30 +1,12 @@
 # import the necessary packages
 import argparse
-import logging
+
 import os
 import sys
-import tarfile
-import time
-import urllib
-import zipfile
-from collections import defaultdict
-from io import StringIO
-from os import chdir
-from pathlib import Path
-
 import cv2
-import imutils
 import numpy as np
-import six.moves.urllib as urllib
-import tensorflow as tf
-import wget
-from cvplay.codes.models.research.object_detection.utils import label_map_util
-from cvplay.codes.models.research.object_detection.utils import \
-    visualization_utils as vis_util
 from model_downloader import download_model
-from imutils.video import FPS, VideoStream
-from matplotlib import pyplot as plt
-from PIL import Image
+
 
 sys.path.append("..")
 
