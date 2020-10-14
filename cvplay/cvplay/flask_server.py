@@ -14,8 +14,7 @@ from flask import (Flask, flash, make_response, redirect, render_template,
                    request, send_file, send_from_directory, url_for)
 from werkzeug.utils import secure_filename
 
-#from flask_process import process_video
-from cvplay.flask_process import process_video
+from flask_process import process_video
 from db_create import main as db
 from flask_process import process_pose_estimation, process_segment_image
 

@@ -3,7 +3,7 @@ import sqlite3
 import uuid
 from pathlib import Path
 
-from cvplay.video_objdet import objdetectionfunc
+from video_objdet import objdetectionfunc
 
 from deeplab_sem_seg import preprocess
 from run_video_pose_estimation import estimate_pose

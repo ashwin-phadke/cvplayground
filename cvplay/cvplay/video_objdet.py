@@ -21,9 +21,7 @@ import wget
 from cvplay.codes.models.research.object_detection.utils import label_map_util
 from cvplay.codes.models.research.object_detection.utils import \
     visualization_utils as vis_util
-# from cvplay.model_downloader import download_model
-#from cvplay import model_downloader
-from cvplay.model_downloader import download_model
+from model_downloader import download_model
 from imutils.video import FPS, VideoStream
 from matplotlib import pyplot as plt
 from PIL import Image
@@ -61,7 +59,9 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
         BASE_PATH, model_name + '/', model_name, INFERENCE)
     if not os.path.exists(PATH_TO_CKPT):
         path_to_model, path_to_pbtxt = download_model(model_name, pbtxt_name)
-
+    else :
+        path_to_model = os.path.join(BASE_PATH, model_name + '/', model_name, INFERENCE)
+        path_to_pbtxt = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
     # Define the COCO classes set.
     classes_90 = ["person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
