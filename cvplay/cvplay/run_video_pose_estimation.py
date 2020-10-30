@@ -21,6 +21,9 @@ fps_time = 0
 
 
 def estimate_pose(id, video, model):
+    """
+    Here we estimate pose using inout video.
+    """
 
     VID_SAVE_PATH = 'static/'
     BASE_PATH = 'models/'
@@ -67,6 +70,3 @@ def estimate_pose(id, video, model):
 
 
 logger.debug('finished+')
-
-# if __name__ == '__main__':
-#     pass()

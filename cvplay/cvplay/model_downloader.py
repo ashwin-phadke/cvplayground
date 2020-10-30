@@ -31,29 +31,42 @@ logger.addHandler(ch)
 
 # Download and extract model in the detect_models directory, to get the directory structure required for this project check README.
 def download_model(model_name, pbtxt_name):
+    """
+    Function to download a model.
+    model_name: Input model name to be dowloaded.
+    pbtxt_name: PBTXT file name to be downloaded for the model mentioned in model_name
+    """
+
     base_url = 'http://download.tensorflow.org/models/object_detection/'
     model_file = base_url + model_name + '.tar.gz'
     print("Downloading {} model".format(model_name))
+
     path = Path('..')
     chdir(path)
     model_path = os.path.join(os.getcwd(), 'cvplay/', 'detect_models/')
     download_model_path = os.path.join(model_path, model_name + '.tar.gz')
+
     urllib.request.urlretrieve(url=model_file, filename=download_model_path)
     tar_file = tarfile.open(download_model_path)
     for file in tar_file.getmembers():
         file_name = os.path.basename(file.name)
         if 'frozen_inference_graph.pb' in file_name:
             tar_file.extract(file, os.path.join(model_path, model_name))
+    
     os.remove(download_model_path)
     INFERENCE = 'frozen_inference_graph.pb'
+
     download_label_path = os.path.join(
         model_path, model_name, model_name, pbtxt_name)
     downloaded_model_path = os.path.join(
         model_path, model_name, model_name, INFERENCE)
+
     label_base_url = 'https://raw.githubusercontent.com/opencv/opencv_extra/master/testdata/dnn/'
     pbtxt_file = label_base_url + pbtxt_name
+
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
     print("Comleted Downloading model and config files")
+    
     return(downloaded_model_path, download_label_path)
 
 
