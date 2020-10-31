@@ -154,7 +154,10 @@
           <h2>TF Object Detection API</h2>
           <p>Get started with your object detection models search using models built using Object Detection API from Tebsorflow. We provide best models to choose from based on multiple criteria.
           </p>
-          <p><a href="{{ url_for('show_form') }}" class="btn btn-success btn-lg active" role="button">Start App</a>
+          <div class="btn-toolbar" style="padding-left: 15px" class="center" >
+            <a href="{{ url_for('show_image_form')}}" class="btn btn-primary btn-lg" role="button" >  Image</a>
+            <a href="{{ url_for('show_form')}}" class="btn btn-success  btn-lg " role="button">   Video</a>
+          </div>
         </div>
       </div><!-- /.col-lg-4 -->
       <div class="col-sm-6 col-md-4">
@@ -164,9 +167,10 @@
           <h2>Segmentation</h2>
           <p>Ever wondered what those many Segmentation models do in different way? No more, try out various
             segmentation models and test the ones that fit best to your data</p>
-          <p><a href="{{ url_for('show_segmentation_form')}}" class="btn btn-success btn-lg active" role="button">Start App</a>
-
-
+            <div class="btn-toolbar" style="padding-left: 15px" class="center" >
+              <a href="{{ url_for('show_pose_estimation_form')}}" class="btn btn-primary btn-lg" role="button">  Image</a>
+              <a href="{{ url_for('show_segmentation_form')}}" class="btn btn-success  btn-lg" role="button" >  Video</a>
+            </div>
         </div>
       </div><!-- /.col-lg-4 -->
       <div class="col-sm-6 col-md-4">
@@ -176,7 +180,10 @@
             alt="Generic placeholder image" width="200" height="200">
           <h2>Pose Estimation</h2>
           <p>Try pose Estimation models on your data and check out some amazing results. Pose Estimation is used in multiple applciations ranging from domains like healthcare, fitness to security</p>
-          <p><a href="{{ url_for('show_pose_estimation_form')}}" class="btn btn-success btn-lg warning" role="button">Start App</a>
+            <div class="btn-toolbar" style="padding-left: 15px" class="center" >
+              <a href="{{ url_for('show_pose_estimation_form')}}" class="btn btn-primary btn-lg " role="button" >  Image</a>
+              <a href="{{ url_for('show_segmentation_form')}}" class="btn btn-success btn-lg " role="button">   Video</a>
+            </div>
         </div><!-- /.col-lg-4 -->
       </div>
     </div><!-- /.row -->
