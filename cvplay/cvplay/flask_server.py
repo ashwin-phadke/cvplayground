@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 
 from db_create import main as db
 from flask_process import (process_pose_estimation, process_segment_image,
-                           process_video)
+                           process_video, process_objdet_image)
 
 UPLOAD_FOLDER = 'uploads'
 DOWNLOAD_FOLDER = 'static/'
@@ -97,6 +97,14 @@ def show_form():
     Returns Model selection page where choice of different models is given to the user. These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
     """
     return render_template('modelselectindex.html')
+
+@app.route('/upload_image_page', methods=['GET', 'POST'])
+def show_image_form():
+    """
+    Returns Model selection page where choice of different models is given to the user. These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
+    """
+    return render_template('modelselectimageobjdet.html')
+
 
 
 @app.route('/segmentation_upload_page', methods=['GET', 'POST'])
@@ -287,6 +295,58 @@ def upload_file():
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
 
+
+
+
+@app.route('/uploads_image', methods=['POST', 'GET'])
+def upload_image_file():
+    if request.method == 'POST':
+        ip_address = request.remote_addr
+        app.logger.info('User %s entered app ', ip_address)
+        conn = sqlite3.connect('db/cvplayground.sqlite')
+        logging.info('User %s entered app', ip_address)
+    # check if the post request has the file part
+        if 'file' not in request.files:
+            if 'model' not in request.form:
+                flash('No file part and no model selected.')
+                return redirect(request.url)
+        file = request.files['file']
+
+        model = request.form['radios']
+        model_name, pbtxt_name = model_dict[model]
+
+        if file.filename == '':
+            flash('No file selected for uploading')
+            logging.info("user %s did not select a file", ip_address)
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            logging.info('User %s successfully saved file', ip_address)
+            print("File saved successfully")
+            cur = conn.cursor()
+            new_uuid = str(generate_uuid())
+
+            dtt = date_time()
+            isUploaded = True
+            isProcessed = False
+            location = file_path
+            status = 1
+            cur.execute("INSERT INTO uploads (id, status, isUploaded, isProcessed, location, datetime, model_name, pbtxt_name) values(?, ?, ?, ?, ?, ?, ?, ?)",
+                        (new_uuid, status, isUploaded, isProcessed, location, dtt, model_name, pbtxt_name))
+            conn.commit()
+            conn.close()
+            logging.info('File saved successfully from %s user', ip_address)
+            process_objdet_image()
+            filename = new_uuid + '.png'
+            time.sleep(5)
+            return redirect('/downloadsegmentationfile/' + filename)
+
+        else:
+            flash('Allowed file types are txt, pdf, png, jpg, jpeg, gif')
+            logging.info('User %s did not save a video file', ip_address)
+            return redirect(request.url)
 
 @app.route("/downloadsegmentationfile/<filename>", methods=['GET'])
 def download_segfile(filename):
