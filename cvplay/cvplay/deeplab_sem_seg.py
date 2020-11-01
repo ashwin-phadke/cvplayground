@@ -28,6 +28,8 @@ from matplotlib import gridspec
 from matplotlib import pyplot as plt
 from PIL import Image
 from six.moves import urllib
+import cv2
+import time
 
 """## Import helper methods
 These methods help us perform the following tasks:
@@ -90,6 +92,68 @@ class DeepLabModel(object):
             feed_dict={self.INPUT_TENSOR_NAME: [np.asarray(resized_image)]})
         seg_map = batch_seg_map[0]
         return resized_image, seg_map
+
+    def run_video(self, video_path, id):
+        """Runs inference on a single video.
+
+        Args:
+        path: Path to video
+
+        Returns:
+        resized_image: RGB image resized from original input image.
+        seg_map: Segmentation map of `resized_image`.
+        """
+        VID_SAVE_PATH = 'static/' + id + '.avi'
+
+        cap = cv2.VideoCapture(video_path)
+        wi = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        he = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        print(wi, he)
+
+        vwriter = cv2.VideoWriter(VID_SAVE_PATH,cv2.VideoWriter_fourcc(*'MJPG'),10, (wi, he))
+        counter = 0
+        fac = 2
+        start = time.time()
+        while True:
+            ret, image = cap.read()
+            
+            if ret:
+                counter += 1
+
+                ## resize image
+
+                height, width, channels = image.shape
+                resize_ratio = 1.0 * self.INPUT_SIZE / max(width, height)
+                target_size = (int(resize_ratio * width), int(resize_ratio * height))
+                image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                resized_image = cv2.resize(image, target_size, interpolation=cv2.INTER_AREA)
+                output = resized_image.copy()
+
+                ## get segmentation map
+                batch_seg_map = self.sess.run(
+                self.OUTPUT_TENSOR_NAME,
+                feed_dict={self.INPUT_TENSOR_NAME: [np.asarray(resized_image)]})
+                seg_map = batch_seg_map[0]
+
+                ## visualize
+                seg_image = label_to_color_image(seg_map).astype(np.uint8)
+
+                ## overlay on image
+                alpha = 0.7
+                cv2.addWeighted(seg_image, alpha, output, 1 - alpha, 0, output)
+
+                output = cv2.resize(output, (wi, he), interpolation=cv2.INTER_AREA)
+    #             outimg = 'image_' + str(counter) + '.jpg'
+    #             cv2.imwrite(os.path.join(os.getcwd(), 'test_out', outimg),output)
+                vwriter.write(output)
+            else:
+                break
+                
+        end = time.time()
+        print("Frames and Time Taken: ", counter, end-start)
+        cap.release()
+        vwriter.release()
+        return VID_SAVE_PATH
 
 
 def create_pascal_label_colormap():
@@ -222,10 +286,16 @@ def preprocess(location, id, model_name):
     #                'deeplab/g3doc/img/%s.jpg?raw=true')
 
     image_url = location
-    #image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
-    img_path = run_visualization(image_url, MODEL, FULL_COLOR_MAP,
-                                 FULL_LABEL_MAP, LABEL_NAMES, id)
-    return img_path
+    filename, file_extension = os.path.splitext(image_url)
+    extensions_list = ['.mp4', '.avi', '.mov', '.mkv']
+    if file_extension in extensions_list:
+        vid_path = MODEL.run_video(image_url, id)
+        return vid_path
+    else:
+        #image_url = IMAGE_URL or _SAMPLE_URL % SAMPLE_IMAGE
+        img_path = run_visualization(image_url, MODEL, FULL_COLOR_MAP,
+                                    FULL_LABEL_MAP, LABEL_NAMES, id)
+        return img_path
 
 
 def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, id):
