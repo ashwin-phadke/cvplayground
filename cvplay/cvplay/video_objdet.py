@@ -45,7 +45,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
         path_to_model = os.path.join(BASE_PATH, model_name + '/', model_name, INFERENCE)
         path_to_pbtxt = os.path.join(BASE_PATH, model_name + '/', model_name, pbtxt_name)
     # Define the COCO classes set.
-    classes_90 = ["person", "bicycle", "car", "motorcycle",
+    classes_90 = ["background", "person", "bicycle", "car", "motorcycle",
                   "airplane", "bus", "train", "truck", "boat", "traffic light", "fire hydrant",
                   "unknown", "stop sign", "parking meter", "bench", "bird", "cat", "dog", "horse",
                   "sheep", "cow", "elephant", "bear", "zebra", "giraffe", "unknown", "backpack",
