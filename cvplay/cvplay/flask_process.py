@@ -5,6 +5,8 @@ from video_objdet import objdetectionfunc
 from deeplab_sem_seg import preprocess
 from run_video_pose_estimation import estimate_pose
 from image_objdet import imageobjdetectionfunc
+from run_image_pose_estimation import image_pose_estimation
+import os
 
 
 def convert_ret_tuple(tup):
@@ -24,6 +26,23 @@ def process_pose_estimation():
         cur.execute(
             "SELECT id, location FROM uploads WHERE isProcessed=0 order by datetime DESC")
     estimate_pose(id, location, model_name)
+    cur.execute("UPDATE uploads SET isProcessed=1  WHERE id='"+id+"'")
+    conn.commit()
+    conn.close()
+    return id
+
+def process_image_pose_estimation():
+    conn = sqlite3.connect(
+        'db/cvplayground.sqlite')
+    cur = conn.cursor()
+    cur.execute(
+        "SELECT id, location, model_name FROM uploads WHERE isProcessed=0 order by datetime DESC")
+    #cur.execute("SELECT id, location, model_name FROM uploads WHERE isProcessed=0 order by datetime DESC LIMIT 1")
+    id, location, model_name = cur.fetchone()
+    if not (id, location):
+        cur.execute(
+            "SELECT id, location FROM uploads WHERE isProcessed=0 order by datetime DESC")
+    image_pose_estimation(id, location, model_name)
     cur.execute("UPDATE uploads SET isProcessed=1  WHERE id='"+id+"'")
     conn.commit()
     conn.close()

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+        crossorigin="anonymous"></script>
+
+    <title>Playground : Model Selector</title>
+</head>
+
+<body>
+
+    <body>
+        <div class="mt-2 col-md-12">
+            <form method="post" action="/upload_video_segmentation_page" enctype="multipart/form-data">
+                <div class="dropdown">
+                    <h2>Select the model you want to perform semantic segmentation with : </h2>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Select</th>
+                                <th scope="col">Backbone Model Name</th>
+                                <th scope="col">Segmentation Model Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!-- <th scope="row">1</th> -->
+                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainaug" id="radio1" required />
+                                    <label for="radio1"></label></td>
+                                <td>Mobilenet V2 COCO VOC_TRAIN_AUG</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">2</th> -->
+                                <td> <input type="radio" name="radios" value="mobilenetv2_coco_voctrainval" id="radio2" required />
+                                    <label for="radio2"></label></td>
+                                <td>Mobilenet V2 COCO VOC_TRAIN_VAL</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">3</th> -->
+                                <td> <input type="radio" name="radios" value="xception_coco_voctrainaug" id="radio3" required />
+                                    <label for="radio3"></label></td>
+                                <td>XCEPTION COCO VOC_TRAIN_AUG</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_AUG</td>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">3</th> -->
+                                <td> <input type="radio" name="radios" value="xception_coco_voctrainval" id="radio4" required />
+                                    <label for="radio4"></label></td>
+                                <td>XCEPTION COCO VOC_TRAIN_VAL</td>
+                                <td>DeepLab v3 MNV2 PASCAL_TRAIN_VAL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p>
+                <div class="mt-2 col-md-12">
+                    <h2>Select a file to upload</h2>
+                    <input type="file" name="file" autocomplete="off" accept="video/*" required>
+                    </p>
+                    <p>
+                        <!-- <input type="submit" value="Submit"> -->
+                        <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
+                    </p>
+                </div>
+        </div>
+        </form>
+
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
