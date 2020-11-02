@@ -2,10 +2,12 @@ import argparse
 import logging
 import sys
 import time
-import matplotlib.pyplot as plt
-from tf_pose import common
+
 import cv2
+import matplotlib.pyplot as plt
 import numpy as np
+
+from tf_pose import common
 from tf_pose.estimator import TfPoseEstimator
 from tf_pose.networks import get_graph_path, model_wh
 
@@ -21,6 +23,9 @@ logger.addHandler(ch)
 
 
 def image_pose_estimation(id, location, model_name):
+    """
+    Image POse Estimation using TF Pose Estimator
+    """
 
     parser = argparse.ArgumentParser(description='tf-pose-estimation run')
     parser.add_argument('--resize', type=str, default='0x0',

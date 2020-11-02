@@ -15,6 +15,18 @@ sys.path.append("..")
 
 
 def imageobjdetectionfunc(urlll, id, model_name, pbtxt_name):
+    """
+    Implements the function to proess images for object detection.
+    Function :
+        objdetectionfunc()
+    Arguments :
+        location = file store location
+        id : uuid of the file
+        model name : chosen model name
+        pbtxt_name : pbtxt file of the chosen model.
+        Confidence : minimum probability to filter weak detections
+    """
+
     ap = argparse.ArgumentParser()
     ap.add_argument("-c", "--confidence", type=float, default=0.8,
                     help="minimum probability to filter weak detections")

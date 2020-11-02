@@ -1,3 +1,4 @@
+
 import logging
 import os
 import sqlite3
@@ -5,8 +6,8 @@ import time
 import uuid
 
 #from webapp import app
-from flask import (Flask, flash, make_response, redirect, render_template,
-                   request, send_file, send_from_directory, url_for)
+from flask import (Flask, flash, redirect, render_template,
+                   request, send_file)
 from werkzeug.utils import secure_filename
 
 from db_create import main as db
@@ -75,6 +76,9 @@ def date_time():
 
 
 def allowed_file(filename):
+    """
+    CHeck if file in allowed file.
+    """
     return '.' in filename and filename.rsplit('.', 1)[1].lower()
 
 
@@ -94,33 +98,38 @@ def upload_form():
 @app.route('/upload_page', methods=['GET', 'POST'])
 def show_form():
     """
-    Returns Model selection page where choice of different models is given to the user. These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
+    Returns Model selection page where choice of different models is given to the user.
+    These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
     """
     return render_template('modelselectindex.html')
+
 
 @app.route('/upload_image_page', methods=['GET', 'POST'])
 def show_image_form():
     """
-    Returns Model selection page where choice of different models is given to the user. These models are from Tensorfloe model zoo from Tensorflow v1 and are downloaded as per request.
+    Returns Model selection page where choice of different models is given to the user.
+    These models are from Tensorfloe model zoo
+    from Tensorflow v1 and are downloaded as per request.
     """
     return render_template('modelselectimageobjdet.html')
-
 
 
 @app.route('/segmentation_upload_page', methods=['GET', 'POST'])
 def show_segmentation_form():
     """
-    Returns the template to upload image and choose model to perform semantic segmentation using Deeplab v3.
+    Returns the template to upload image and choose model
+    to perform semantic segmentation using Deeplab v3.
     """
     return render_template('modelselectsegmentationindex.html')
+
 
 @app.route('/video_segmentation_upload_page', methods=['GET', 'POST'])
 def show_video_segmentation_form():
     """
-    Returns the template to upload image and choose model to perform semantic segmentation using Deeplab v3.
+    Returns the template to upload image and choose model to
+    perform semantic segmentation using Deeplab v3.
     """
     return render_template('modelselectvideosegmentation.html')
-
 
 
 @app.route('/pose_estimation_upload_page', methods=['GET', 'POST'])
@@ -130,6 +139,7 @@ def show_pose_estimation_form():
     """
     return render_template('modelselectposeestimation.html')
 
+
 @app.route('/image_pose_estimation_modelselect_page', methods=['GET', 'POST'])
 def show_image_pose_estimation_form():
     """
@@ -137,10 +147,11 @@ def show_image_pose_estimation_form():
     """
     return render_template('modelselectimageposeestimation.html')
 
+
 @app.route('/upload_image_pose_estimation_page', methods=['POST', 'GET'])
 def upload_image_pose_estimation_file():
     """
-    Function to process the uploaded video for Pose Estimation.
+    Function to upload image for Pose Estimation and then send for processing.
     """
 
     # Check if the method was a POST request
@@ -197,13 +208,10 @@ def upload_image_pose_estimation_file():
             return redirect(request.url)
 
 
-
-
-
 @app.route('/upload_pose_estimation_page', methods=['POST', 'GET'])
 def upload_pose_estimation_file():
     """
-    Function to process the uploaded video for Pose Estimation.
+    Function to upload video for Pose Estimation and then send for processing.
     """
 
     # Check if the method was a POST request
@@ -260,11 +268,10 @@ def upload_pose_estimation_file():
             return redirect(request.url)
 
 
-
 @app.route('/upload_video_segmentation_page', methods=['POST', 'GET'])
 def upload_video_segmentation_file():
     """
-    Function to process the uploaded image for semantic segmentation over deeplab v3.
+    Function to upload video for semantic segmentation over deeplab v3 and then send for processing.
     """
 
     # Check if the method was a POST request
@@ -323,11 +330,10 @@ def upload_video_segmentation_file():
             return redirect(request.url)
 
 
-
 @app.route('/upload_segmentation_page', methods=['POST', 'GET'])
 def upload_segmentation_file():
     """
-    Function to process the uploaded image for semantic segmentation over deeplab v3.
+    Function to upload image for semantic segmentation over deeplab v3 and then send for processing.
     """
 
     # Check if the method was a POST request
@@ -344,7 +350,8 @@ def upload_segmentation_file():
         # Get the uploaded file.
         file = request.files['file']
 
-        # Get the name of the backbone network chosen by the user which is also a key from the _MODEL_URLS dictionary.
+        # Get the name of the backbone network chosen by the user
+        # which is also a key from the _MODEL_URLS dictionary.
         backbone_model_name = request.form['radios']
 
         # Get the relevant pre trained model using the above key.
@@ -388,6 +395,9 @@ def upload_segmentation_file():
 
 @app.route('/uploads', methods=['POST', 'GET'])
 def upload_file():
+    """
+    Upload Video file for object detection and then send for processing.
+    """
     if request.method == 'POST':
         ip_address = request.remote_addr
         app.logger.info('User %s entered app ', ip_address)
@@ -437,10 +447,11 @@ def upload_file():
             return redirect(request.url)
 
 
-
-
 @app.route('/uploads_image', methods=['POST', 'GET'])
 def upload_image_file():
+    """
+    Upload Image file for object detection and then send for processing.
+    """
     if request.method == 'POST':
         ip_address = request.remote_addr
         app.logger.info('User %s entered app ', ip_address)
@@ -489,24 +500,40 @@ def upload_image_file():
             logging.info('User %s did not save a video file', ip_address)
             return redirect(request.url)
 
+
 @app.route("/downloadsegmentationfile/<filename>", methods=['GET'])
 def download_segfile(filename):
+    """
+    Download Image object detection, Video Segmentation,
+    Image and Video Pose Estimation processed files.
+    """
     return render_template('downloadsegmentindex.html', value=filename)
 
 
 @app.route('/return-seg-files/<filename>')
 def return_segfiles_tut(filename):
+    """
+    Returns the processed file to the download page for the user to view the file and download it.
+    Image files are viewable currently whereas videos have download button.
+    """
     file_path = DOWNLOAD_FOLDER + filename
-    return send_file(file_path,  as_attachment=True)
+    return send_file(file_path, as_attachment=True)
 
 
 @app.route("/downloadfile/<filename>", methods=['GET'])
 def download_file(filename):
+    """
+    Download video obejct detection processed file.
+    """
     return render_template('downloadindex.html', value=filename)
 
 
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
+    """
+    Returns the processed file to the download page for the user to view the file and download it.
+    Image files are viewable currently whereas videos have download button.
+    """
     file_path = DOWNLOAD_FOLDER + filename
     return send_file(file_path, as_attachment=True)
 

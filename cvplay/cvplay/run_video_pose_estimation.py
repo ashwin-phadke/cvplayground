@@ -22,7 +22,7 @@ fps_time = 0
 
 def estimate_pose(id, video, model):
     """
-    Here we estimate pose using inout video.
+    Estimate pose using input video.
     """
 
     VID_SAVE_PATH = 'static/'

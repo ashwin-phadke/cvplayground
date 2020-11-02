@@ -15,6 +15,11 @@ def convert_ret_tuple(tup):
 
 
 def process_pose_estimation():
+    """
+    Connects to the database and fetches the file uploaded by the user to process.
+    Sends it to the required function where the file processing function resides.
+    """
+
     conn = sqlite3.connect(
         'db/cvplayground.sqlite')
     cur = conn.cursor()
@@ -32,6 +37,11 @@ def process_pose_estimation():
     return id
 
 def process_image_pose_estimation():
+    """
+    Connects to the database and fetches the file uploaded by the user to process.
+    Sends it to the required function where the file processing function resides.
+    """
+
     conn = sqlite3.connect(
         'db/cvplayground.sqlite')
     cur = conn.cursor()
@@ -50,6 +60,11 @@ def process_image_pose_estimation():
 
 
 def process_segment_image():
+    """
+    Connects to the database and fetches the file uploaded by the user to process.
+    Sends it to the required function where the file processing function resides.
+    """
+
     conn = sqlite3.connect(
         'db/cvplayground.sqlite')
     cur = conn.cursor()
@@ -67,6 +82,11 @@ def process_segment_image():
     return id
 
 def process_segment_video():
+    """
+    Connects to the database and fetches the file uploaded by the user to process.
+    Sends it to the required function where the file processing function resides.
+    """
+
     conn = sqlite3.connect(
         'db/cvplayground.sqlite')
     cur = conn.cursor()
@@ -85,6 +105,11 @@ def process_segment_video():
 
 
 def process_objdet_image():
+    """
+    Connects to the database and fetches the file uploaded by the user to process.
+    Sends it to the required function where the file processing function resides.
+    """
+
     conn = sqlite3.connect(
         'db/cvplayground.sqlite')
     cur = conn.cursor()
