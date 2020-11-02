@@ -67,6 +67,7 @@ def estimate_pose(id, video, model):
     cap.release()
     out.release()
     cv2.destroyAllWindows()
+    e.persistent_sess.close()
 
 
 logger.debug('finished+')
