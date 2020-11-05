@@ -1,12 +1,13 @@
 # import the necessary packages
 import argparse
-
+import logging
 import os
 import sys
+
 import cv2
 import numpy as np
-from model_downloader import download_model
 
+from model_downloader import download_model
 
 sys.path.append("..")
 
@@ -59,7 +60,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                   "book", "clock", "vase", "scissors", "teddy bear", "hair drier", "toothbrush"]
 
     CLASSES = classes_90  # New list of classess with 90 classess.
-    print(CLASSES)
+    logging.info(CLASSES)
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
     cvNet = cv2.dnn.readNetFromTensorflow(path_to_model, path_to_pbtxt)
 
@@ -94,7 +95,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                 # `detections`, then compute the (x, y)-coordinates of
                 # the bounding box for the object
                 idx = int(detections[0, 0, i, 1])
-                print(idx)
+                logging.info(idx)
                 box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
                 (startX, startY, endX, endY) = box.astype("int")
 
@@ -107,7 +108,7 @@ def objdetectionfunc(urlll, id, model_name, pbtxt_name):
                 cv2.putText(img, label, (startX, y),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
 
-                print(label)
+                logging.info(label)
 
         out_img = cv2.resize(img, (640, 480))
         out.write(out_img)

@@ -16,11 +16,14 @@ The models used in this colab perform semantic segmentation. Semantic segmentati
 ## Import Libraries
 """
 
+import logging
 # Commented out IPython magic to ensure Python compatibility.
 import os
 import tarfile
 import tempfile
+import time
 
+import cv2
 import numpy as np
 import tensorflow as tf
 import tensorflow.compat.v1 as tf1
@@ -28,8 +31,6 @@ from matplotlib import gridspec
 from matplotlib import pyplot as plt
 from PIL import Image
 from six.moves import urllib
-import cv2
-import time
 
 """## Import helper methods
 These methods help us perform the following tasks:
@@ -108,7 +109,7 @@ class DeepLabModel(object):
         cap = cv2.VideoCapture(video_path)
         wi = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         he = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-        print(wi, he)
+        logging.info(wi, he)
 
         vwriter = cv2.VideoWriter(VID_SAVE_PATH,cv2.VideoWriter_fourcc(*'MJPG'),10, (wi, he))
         counter = 0
@@ -150,7 +151,7 @@ class DeepLabModel(object):
                 break
                 
         end = time.time()
-        print("Frames and Time Taken: ", counter, end-start)
+        logging.info("Frames and Time Taken: ", counter, end-start)
         cap.release()
         vwriter.release()
         return VID_SAVE_PATH
@@ -260,13 +261,13 @@ def preprocess(location, id, model_name):
     tf.io.gfile.makedirs(model_dir)
 
     download_path = os.path.join(model_dir, _TARBALL_NAME)
-    print('downloading model, this might take a while...')
+    logging.info('downloading model, this might take a while...')
     urllib.request.urlretrieve(_DOWNLOAD_URL_PREFIX + model_name,
                                download_path)
-    print('download completed! loading DeepLab model...')
+    logging.info('download completed! loading DeepLab model...')
 
     MODEL = DeepLabModel(download_path)
-    print('model loaded successfully!')
+    logging.info('model loaded successfully!')
 
     """## Run on sample images
 
@@ -305,10 +306,10 @@ def run_visualization(url, MODEL, FULL_COLOR_MAP, FULL_LABEL_MAP, LABEL_NAMES, i
     #     jpeg_str = f.read()
     #     original_im = Image.open(BytesIO(jpeg_str))
     # except IOError:
-    #     print('Cannot retrieve image. Please check url: ' + url)
+    #     logging.info('Cannot retrieve image. Please check url: ' + url)
     #     return
 
-    print('running deeplab on image %s...' % url)
+    logging.info('running deeplab on image %s...' % url)
     resized_im, seg_map = MODEL.run(url)
 
     img_path = vis_segmentation(resized_im, seg_map, MODEL,
@@ -320,7 +321,7 @@ if __name__ == "__main__":
     try:
         preprocess()
     except Exception as e:
-        print(e)
+        logging.info(e)
 
 """## What's next
 

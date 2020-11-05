@@ -60,11 +60,11 @@ def check_db_exists():
     Checks to see if the dataase file required for the app to function exists in the current directory and if not then creates it with all the required tables.
     """
     if not os.path.isfile('db/cvplayground.db'):
-        print('Creating database, this might take a while')
+        logging.info('Creating database, this might take a while')
         db()
-        print('Database created. Starting the app now')
+        logging.info('Database created. Starting the app now')
     else:
-        print('Database already exists. Starting app now...')
+        logging.info('Database already exists. Starting app now...')
 
 
 def date_time():
@@ -178,7 +178,7 @@ def upload_image_pose_estimation_file():
                 app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 
@@ -238,7 +238,7 @@ def upload_pose_estimation_file():
                 app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 
@@ -300,7 +300,7 @@ def upload_video_segmentation_file():
                 app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 
@@ -363,7 +363,7 @@ def upload_segmentation_file():
                 app.config['UPLOAD_FOLDER'], filename_save)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 
@@ -422,7 +422,7 @@ def upload_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 
@@ -476,7 +476,7 @@ def upload_image_file():
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             logging.info('User %s successfully saved file', ip_address)
-            print("File saved successfully")
+            logging.info("File saved successfully")
             cur = conn.cursor()
             new_uuid = str(generate_uuid())
 

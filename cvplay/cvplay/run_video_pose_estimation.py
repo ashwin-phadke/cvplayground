@@ -45,7 +45,7 @@ def estimate_pose(id, video, model):
     cap = cv2.VideoCapture(video)
 
     if cap.isOpened() is False:
-        print("Error opening video stream or file")
+        logging.error("Error opening video stream or file")
     while cap.isOpened():
         ret_val, image = cap.read()
         if not ret_val:

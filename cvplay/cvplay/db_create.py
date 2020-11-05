@@ -1,3 +1,4 @@
+import logging
 import sqlite3
 from sqlite3 import Error
 import os
@@ -14,7 +15,7 @@ def create_connection(db_file):
         conn = sqlite3.connect(db_file)
         return conn
     except Error as e:
-        print(e)
+        logging.error(e)
 
     return conn
 
@@ -29,7 +30,7 @@ def create_table(conn, create_table_sql):
         c = conn.cursor()
         c.execute(create_table_sql)
     except Error as e:
-        print(e)
+        logging.error(e)
 
 
 def main():
@@ -60,7 +61,7 @@ def main():
         create_table(conn, sqlite_create_cvp_table)
 
     else:
-        print("Error! cannot create the database connection.")
+        logging.error("Error! cannot create the database connection.")
 
 
 if __name__ == '__main__':

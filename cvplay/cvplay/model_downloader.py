@@ -39,7 +39,7 @@ def download_model(model_name, pbtxt_name):
 
     base_url = 'http://download.tensorflow.org/models/object_detection/'
     model_file = base_url + model_name + '.tar.gz'
-    print("Downloading {} model".format(model_name))
+    logging.info("Downloading {} model".format(model_name))
 
     path = Path('..')
     chdir(path)
@@ -65,10 +65,10 @@ def download_model(model_name, pbtxt_name):
     pbtxt_file = label_base_url + pbtxt_name
 
     urllib.request.urlretrieve(url=pbtxt_file, filename=download_label_path)
-    print("Comleted Downloading model and config files")
+    logging.info("Comleted Downloading model and config files")
     
     return(downloaded_model_path, download_label_path)
 
 
 if __name__ == "__main__":
-    print("main")
+    logging.info("main")
