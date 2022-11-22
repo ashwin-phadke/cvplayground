@@ -5,7 +5,7 @@ numpy==1.18.4
 six==1.14.0
 matplotlib==3.3.0
 asposestorage==1.0.2
-Pillow==7.1.2
+Pillow==9.3.0
 Flask==1.1.2
 werkzeug==1.0.1
 pytest-custom-exit-code==0.3.0
