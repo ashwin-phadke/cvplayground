@@ -7,7 +7,7 @@ matplotlib==3.3.0
 asposestorage==1.0.2
 Pillow==7.1.2
 Flask==1.1.2
-werkzeug==1.0.1
+werkzeug==2.2.3
 pytest-custom-exit-code==0.3.0
 imutils==0.5.3
 
